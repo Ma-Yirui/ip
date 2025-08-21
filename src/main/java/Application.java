@@ -18,6 +18,9 @@ public class Application {
                 String commandWord = tokens[0].toUpperCase();
                 Command.valueOf(commandWord).execute(this.chatBot,
                         Arrays.stream(tokens, 1, tokens.length).collect(Collectors.joining(" ")));
+                if (commandWord.equals("BYE")) {
+                    return;
+                }
                 nextLine = bufferedReader.readLine();
                 }
         } catch (IOException e) {
