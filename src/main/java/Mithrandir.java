@@ -1,7 +1,10 @@
 public class Mithrandir {
-
     public static void main(String[] args) {
-        IOComponent.greet();
-        IOComponent.exit();
+        ChatBot chatBot = new ChatBot();
+        try{
+            chatBot.run();
+        } catch(Exception e){
+            System.err.println("IOException");
+        }
     }
 }
