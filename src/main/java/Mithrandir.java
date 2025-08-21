@@ -1,9 +1,11 @@
+import java.io.IOException;
+
 public class Mithrandir {
     public static void main(String[] args) {
-        ChatBot chatBot = new ChatBot();
+        Application app = new Application();
         try{
-            chatBot.run();
-        } catch(Exception e){
+            app.run();
+        } catch(IOException e){
             System.err.println("IOException");
         }
     }
