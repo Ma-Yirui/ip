@@ -8,9 +8,22 @@ public class ChatBot {
         this.IOComponent.greet();
     }
 
-    public void addToList(String input){
-        this.toDoList.add(new Task(input));
-        this.IOComponent.printAddToList(input);
+    public void addTodoToList(String input){
+        Todo todo = new Todo(input);
+        this.toDoList.add(todo);
+        this.IOComponent.printAddToList(todo);
+    }
+
+    public void addEventToList(String input){
+        Event event = new Event(input);
+        this.toDoList.add(event);
+        this.IOComponent.printAddToList(event);
+    }
+
+    public void addDeadlineToList(String input){
+        Deadline deadline = new Deadline(input);
+        this.toDoList.add(deadline);
+        this.IOComponent.printAddToList(deadline);
     }
 
     public void printList(){

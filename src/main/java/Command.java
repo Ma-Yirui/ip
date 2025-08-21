@@ -5,12 +5,6 @@ public enum Command {
             chatBot.exit();
         }
     },
-    ADD {
-        @Override
-        public void execute(ChatBot chatBot, String input) {
-            chatBot.addToList(input);
-        }
-    },
     LIST {
         @Override
         public void execute(ChatBot chatBot, String input) {
@@ -29,6 +23,24 @@ public enum Command {
         public void execute(ChatBot chatBot, String input) {
             int index = Integer.parseInt(input.split(" ")[0]) - 1;
             chatBot.unmark(index);
+        }
+    },
+    TODO {
+        @Override
+        public void execute(ChatBot chatBot, String input) {
+            chatBot.addTodoToList(input);
+        }
+    },
+    EVENT {
+        @Override
+        public void execute(ChatBot chatBot, String input) {
+            chatBot.addEventToList(input);
+        }
+    },
+    DEADLINE {
+        @Override
+        public void execute(ChatBot chatBot, String input) {
+            chatBot.addDeadlineToList(input);
         }
     };
     abstract void execute(ChatBot chatBot, String input);

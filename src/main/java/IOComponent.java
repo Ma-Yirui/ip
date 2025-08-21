@@ -21,9 +21,21 @@ public class IOComponent {
         System.out.println(separator);
     }
 
-    public void printAddToList(String input){
+    public void printAddToList(Todo todo){
         System.out.println(separator);
-        System.out.println("Added: " + input);
+        System.out.println("Added Todo: " + todo);
+        System.out.println(separator);
+    }
+
+    public void printAddToList(Event event){
+        System.out.println(separator);
+        System.out.println("Added Event: " + event);
+        System.out.println(separator);
+    }
+
+    public void printAddToList(Deadline deadline){
+        System.out.println(separator);
+        System.out.println("Added Deadline: " + deadline);
         System.out.println(separator);
     }
 
