@@ -1,42 +1,36 @@
 public class IOComponent {
     private static final String separator = new String(new char[50]).replace('\0', '-');
 
-    public void greet() {
+    public static void print(String message) {
         System.out.println(separator);
-        System.out.println("A wizard is never late, nor is he early. "
+        System.out.println(message);
+        System.out.println(separator);
+    }
+
+    public void greet() {
+        print("A wizard is never late, nor is he early. "
                 + "He arrives precisely when he means to. "
                 + "Greetings from Gandalf.");
-        System.out.println(separator);
     }
 
     public void exit(){
-        System.out.println(separator);
-        System.out.println("Farewell. My work is now finished.");
-        System.out.println(separator);
+        print("Farewell. My work is now finished.");
     }
 
     public void echo(String input){
-        System.out.println(separator);
-        System.out.println(input);
-        System.out.println(separator);
+        print(input);
     }
 
     public void printAddToList(Todo todo){
-        System.out.println(separator);
-        System.out.println("Added Todo: " + todo);
-        System.out.println(separator);
+        print("Added Todo: " + todo);
     }
 
     public void printAddToList(Event event){
-        System.out.println(separator);
-        System.out.println("Added Event: " + event);
-        System.out.println(separator);
+        print("Added Event: " + event);
     }
 
     public void printAddToList(Deadline deadline){
-        System.out.println(separator);
-        System.out.println("Added Deadline: " + deadline);
-        System.out.println(separator);
+        print("Added Deadline: " + deadline);
     }
 
     public void printList(String[] input){
@@ -48,15 +42,11 @@ public class IOComponent {
     }
 
     public void printMarkDoneSuccessful(String input){
-        System.out.println(separator);
-        System.out.println("Well done! The following task is deemed complete:\n" + input);
-        System.out.println(separator);
+        print("Well done! The following task is deemed complete:\n" + input);
     }
 
     public void printMarkDoneUnsuccessful(){
-        System.out.println(separator);
-        System.out.println("You cannot mark one task repeatedly!");
-        System.out.println(separator);
+        print("You cannot mark one task repeatedly!");
     }
 
     public void printMarkUndoneSuccessful(String input){
@@ -67,9 +57,6 @@ public class IOComponent {
     }
 
     public void printMarkUndoneUnsuccessful(){
-        System.out.println(separator);
-        System.out.println("You cannot unmark one task repeatedly!");
-        System.out.println(separator);
+        print("You cannot unmark one task repeatedly!");
     }
-
 }

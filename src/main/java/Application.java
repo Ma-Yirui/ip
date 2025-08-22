@@ -1,3 +1,5 @@
+import MithrandirExceptions.MithrandirException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,21 +12,27 @@ public class Application {
 
     public void run() throws IOException {
         chatBot.greet();
-        try {
-            String nextLine = bufferedReader.readLine();
-            while (nextLine != null){
-                nextLine = nextLine.trim();
-                String[] tokens = nextLine.split(" ");
-                String commandWord = tokens[0].toUpperCase();
+        String nextLine = bufferedReader.readLine();
+        while (nextLine != null) {
+            nextLine = nextLine.trim();
+            String[] tokens = nextLine.split(" ");
+            String commandWord = tokens[0].toUpperCase();
+            try {
                 Command.valueOf(commandWord).execute(this.chatBot,
                         Arrays.stream(tokens, 1, tokens.length).collect(Collectors.joining(" ")));
                 if (commandWord.equals("BYE")) {
                     return;
                 }
-                nextLine = bufferedReader.readLine();
+            } catch (Exception e) {
+                if (e.getMessage().contains("No enum constant")) {
+                    chatBot.print("No such command! Supported commands are: TODO, EVENT, DEADLINE, BYE, LIST, MARK, " +
+                            "UNMARK");
+                } else {
+                    chatBot.print(e.getMessage());
                 }
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
+
+            }
+            nextLine = bufferedReader.readLine();
         }
     }
 }

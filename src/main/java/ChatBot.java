@@ -1,3 +1,6 @@
+import MithrandirExceptions.InvalidArgumentException;
+import MithrandirExceptions.MithrandirException;
+
 import java.util.ArrayList;
 
 public class ChatBot {
@@ -14,16 +17,27 @@ public class ChatBot {
         this.IOComponent.printAddToList(todo);
     }
 
-    public void addEventToList(String input){
-        Event event = new Event(input);
-        this.toDoList.add(event);
-        this.IOComponent.printAddToList(event);
+    public void addEventToList(String input) throws MithrandirException {
+        try {
+            Event event = new Event(input);
+            this.toDoList.add(event);
+            this.IOComponent.printAddToList(event);
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidArgumentException("EVENT command need 3 parts: task description, '/by' and deadline, you" +
+                    " are missing on something. Check your command!");
+        }
     }
 
-    public void addDeadlineToList(String input){
-        Deadline deadline = new Deadline(input);
-        this.toDoList.add(deadline);
-        this.IOComponent.printAddToList(deadline);
+    public void addDeadlineToList(String input) throws MithrandirException {
+        try {
+            Deadline deadline = new Deadline(input);
+            this.toDoList.add(deadline);
+            this.IOComponent.printAddToList(deadline);
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidArgumentException("DEADLINE command need 4 parts: task description, '/by', Start time of" +
+                    " task and end time of task. You are missing on something. Check your command!");
+        }
+
     }
 
     public void printList(){
@@ -53,5 +67,9 @@ public class ChatBot {
         }
         task.markUndone();
         this.IOComponent.printMarkUndoneSuccessful(task.toString());
+    }
+
+    public void print(String input){
+        IOComponent.print(input);
     }
 }
