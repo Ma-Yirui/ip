@@ -69,6 +69,11 @@ public class ChatBot {
         this.IOComponent.printMarkUndoneSuccessful(task.toString());
     }
 
+    public void delete(int index) throws IndexOutOfBoundsException {
+        Task task = this.toDoList.remove(index);
+        this.IOComponent.printRemoved(task.toString());
+    }
+
     public void print(String input){
         IOComponent.print(input);
     }

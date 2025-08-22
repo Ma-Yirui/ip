@@ -59,4 +59,8 @@ public class IOComponent {
     public void printMarkUndoneUnsuccessful(){
         print("You cannot unmark one task repeatedly!");
     }
+
+    public void printRemoved(String input){
+        print("Removed Task: " + input);
+    }
 }

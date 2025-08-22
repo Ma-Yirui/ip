@@ -83,6 +83,23 @@ public enum Command {
                 throw e;
             }
         }
-    };
+    },
+    DELETE {
+        @Override
+        public void execute(ChatBot chatBot, String input) throws MithrandirException {
+            if (input.isEmpty()) {
+                throw new InvalidArgumentException("DELETE command need EXACTLY ONE integer as argument!");
+            }
+            try {
+                int index = Integer.parseInt(input.split(" ")[0]) - 1;
+                chatBot.delete(index);
+            } catch (NumberFormatException e) {
+                throw new InvalidArgumentException("DELETE command need one INTEGER as argument!");
+            } catch (IndexOutOfBoundsException e) {
+                throw new InvalidArgumentException("Index to be deleted is out of bounds of the todo list!");
+            }
+        }
+    }
+    ;
     abstract void execute(ChatBot chatBot, String input) throws MithrandirException;
 }
