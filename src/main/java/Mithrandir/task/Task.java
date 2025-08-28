@@ -29,7 +29,7 @@ public class Task {
     }
 
     public String toFileString() {
-        return String.format("[%s] %s", isMarked() ? "done" : "undone", getDescription());
+        return String.format("%s || %s", isMarked() ? "done" : "undone", getDescription());
     }
 
     @Override

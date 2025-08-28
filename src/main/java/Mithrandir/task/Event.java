@@ -12,10 +12,13 @@ public class Event extends Task {
     }
 
     @Override
-    public String toFileString() {return "[T]" + super.toFileString();}
+    public String toFileString() {
+        return "EVENT || " + super.toFileString() +  String.format(" /from %s /to %s)",
+                this.fromTime, this.toTime);
+    }
 
     @Override
     public String toString() {
-        return String.format("[D]%s (from: %s to: %s)", super.toString(), this.fromTime,  this.toTime);
+        return String.format("[E]%s (from: %s to: %s)", super.toString(), this.fromTime,  this.toTime);
     }
 }

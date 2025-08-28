@@ -7,7 +7,7 @@ public class Todo extends Task {
     }
 
     @Override
-    public String toFileString() {return "[T]" + super.toFileString();}
+    public String toFileString() {return "TODO || " + super.toFileString();}
 
     @Override
     public String toString() {
