@@ -1,4 +1,4 @@
-package task;
+package Mithrandir.task;
 
 public class Task {
     private final String description;
@@ -26,6 +26,10 @@ public class Task {
 
     public boolean isMarked() {
         return isDone;
+    }
+
+    public String toFileString() {
+        return String.format("[%s] %s", isMarked() ? "done" : "undone", getDescription());
     }
 
     @Override

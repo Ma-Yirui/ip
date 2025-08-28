@@ -1,8 +1,8 @@
-package ui;
+package Mithrandir.ui;
 
-import task.Event;
-import task.Todo;
-import task.Deadline;
+import Mithrandir.task.Todo;
+import Mithrandir.task.Event;
+import Mithrandir.task.Deadline;
 
 public class IOComponent {
     private static final String separator = new String(new char[50]).replace('\0', '-');
@@ -28,11 +28,11 @@ public class IOComponent {
     }
 
     public void printAddToList(Todo todo){
-        print("Added task.Todo: " + todo);
+        print("Added Todo: " + todo);
     }
 
     public void printAddToList(Event event){
-        print("Added task.Event: " + event);
+        print("Added Event: " + event);
     }
 
     public void printAddToList(Deadline deadline){

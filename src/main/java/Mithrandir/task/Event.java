@@ -1,4 +1,4 @@
-package task;
+package Mithrandir.task;
 
 public class Event extends Task {
     private final String fromTime;
@@ -10,6 +10,9 @@ public class Event extends Task {
         this.fromTime = params[0].trim();
         this.toTime = params[1].trim();
     }
+
+    @Override
+    public String toFileString() {return "[T]" + super.toFileString();}
 
     @Override
     public String toString() {

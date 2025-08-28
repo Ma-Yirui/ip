@@ -1,4 +1,4 @@
-import MithrandirExceptions.MithrandirException;
+package Mithrandir;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 public class Application {
     private final ChatBot chatBot = new ChatBot();
     private final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+    private final TaskList taskList = new TaskList();
 
     public void run() throws IOException {
         chatBot.greet();
@@ -18,7 +19,7 @@ public class Application {
             String[] tokens = nextLine.split(" ");
             String commandWord = tokens[0].toUpperCase();
             try {
-                Command.valueOf(commandWord).execute(this.chatBot,
+                Command.valueOf(commandWord).execute(this.chatBot, this.taskList,
                         Arrays.stream(tokens, 1, tokens.length).collect(Collectors.joining(" ")));
                 if (commandWord.equals("BYE")) {
                     return;

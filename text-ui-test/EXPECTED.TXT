@@ -2,10 +2,10 @@
 A wizard is never late, nor is he early. He arrives precisely when he means to. Greetings from Gandalf.
 --------------------------------------------------
 --------------------------------------------------
-Added task.Todo: [T][ ] Write codes
+Added Mithrandir.task.Todo: [T][ ] Write codes
 --------------------------------------------------
 --------------------------------------------------
-Added task.Event: [E][ ] write codes (by: 22/08/2025 1600)
+Added Mithrandir.Event: [E][ ] write codes (by: 22/08/2025 1600)
 --------------------------------------------------
 --------------------------------------------------
 Added Deadline: [D][ ] submit quiz (from: 15-08-2025 to: 22/Aug/2025)
@@ -16,11 +16,11 @@ Added Deadline: [D][ ] submit quiz (from: 15-08-2025 to: 22/Aug/2025)
 3.[D][ ] submit quiz (from: 15-08-2025 to: 22/Aug/2025)
 --------------------------------------------------
 --------------------------------------------------
-Well done! The following task is deemed complete:
+Well done! The following Mithrandir.task is deemed complete:
 [T][x] Write codes
 --------------------------------------------------
 --------------------------------------------------
-You cannot mark one task repeatedly!
+You cannot mark one Mithrandir.task repeatedly!
 --------------------------------------------------
 --------------------------------------------------
 1.[T][x] Write codes
@@ -28,11 +28,11 @@ You cannot mark one task repeatedly!
 3.[D][ ] submit quiz (from: 15-08-2025 to: 22/Aug/2025)
 --------------------------------------------------
 --------------------------------------------------
-Alas! It's the job that's never started as takes longest to finish. This task is marked undone:
+Alas! It's the job that's never started as takes longest to finish. This Mithrandir.task is marked undone:
 [T][ ] Write codes
 --------------------------------------------------
 --------------------------------------------------
-You cannot unmark one task repeatedly!
+You cannot unmark one Mithrandir.task repeatedly!
 --------------------------------------------------
 --------------------------------------------------
 1.[T][ ] Write codes

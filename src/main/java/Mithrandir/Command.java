@@ -1,9 +1,15 @@
-import MithrandirExceptions.*;
+package Mithrandir;
+
+import Mithrandir.MithrandirExceptions.*;
+import Mithrandir.task.Deadline;
+import Mithrandir.task.Event;
+import Mithrandir.task.Task;
+import Mithrandir.task.Todo;
 
 public enum Command {
     BYE {
         @Override
-        public void execute(ChatBot chatBot, String input) throws MithrandirException {
+        public void execute(ChatBot chatBot, TaskList list, String input) throws MithrandirException {
             if(!input.isEmpty()) {
                 throw new InvalidArgumentException("BYE command have no argument!");
             }
@@ -12,22 +18,23 @@ public enum Command {
     },
     LIST {
         @Override
-        public void execute(ChatBot chatBot, String input) throws MithrandirException {
+        public void execute(ChatBot chatBot, TaskList list, String input) throws MithrandirException {
             if(!input.isEmpty()) {
                 throw new InvalidArgumentException("LIST command have no argument!");
             }
-            chatBot.printList();
+            chatBot.print(list.toString());
         }
     },
     MARK {
         @Override
-        public void execute(ChatBot chatBot, String input) throws MithrandirException {
+        public void execute(ChatBot chatBot, TaskList list, String input) throws MithrandirException {
             if (input.isEmpty()) {
                 throw new InvalidArgumentException("MARK command need EXACTLY ONE integer as argument!");
             }
             try {
                 int index = Integer.parseInt(input.split(" ")[0]) - 1;
-                chatBot.mark(index);
+                list.Mark(index);
+                chatBot.mark(list.getTask(index));
             } catch (NumberFormatException e) {
                 throw new InvalidArgumentException("MARK command need one INTEGER as argument!");
             }
@@ -35,13 +42,14 @@ public enum Command {
     },
     UNMARK {
         @Override
-        public void execute(ChatBot chatBot, String input) throws MithrandirException {
+        public void execute(ChatBot chatBot, TaskList list, String input) throws MithrandirException {
             if (input.isEmpty()) {
                 throw new InvalidArgumentException("UNMARK command need EXACTLY ONE integer as argument!");
             }
             try {
                 int index = Integer.parseInt(input.split(" ")[0]) - 1;
-                chatBot.unmark(index);
+                list.Unmark(index);
+                chatBot.unmark(list.getTask(index));
             } catch (NumberFormatException e) {
                 throw new InvalidArgumentException("UNMARK command need one INTEGER as argument!");
             }
@@ -49,22 +57,26 @@ public enum Command {
     },
     TODO {
         @Override
-        public void execute(ChatBot chatBot, String input) throws MithrandirException {
+        public void execute(ChatBot chatBot, TaskList list, String input) throws MithrandirException {
             if (input.isEmpty()) {
-                throw new InvalidArgumentException("TODO command need STRING as task description!");
+                throw new InvalidArgumentException("TODO command need STRING as Mithrandir.task description!");
             }
-            chatBot.addTodoToList(input);
+            Todo todo = new Todo(input);
+            chatBot.addTodoToList(todo);
+            list.addTask(todo);
         }
     },
     EVENT {
         @Override
-        public void execute(ChatBot chatBot, String input) throws MithrandirException {
+        public void execute(ChatBot chatBot, TaskList list, String input) throws MithrandirException {
             if (input.isEmpty()) {
-                throw new InvalidArgumentException("EVENT command need 3 parts: task description, '/by' and deadline " +
-                        "of the task!");
+                throw new InvalidArgumentException("Event command need 4 parts: task description, '/by', " +
+                        "start time of task and end time of task!");
             }
             try {
-                chatBot.addEventToList(input);
+                Event event = new Event(input);
+                chatBot.addEventToList(event);
+                list.addTask(event);
             } catch (MithrandirException e) {
                 throw e;
             }
@@ -72,13 +84,16 @@ public enum Command {
     },
     DEADLINE {
         @Override
-        public void execute(ChatBot chatBot, String input) throws MithrandirException {
+        public void execute(ChatBot chatBot, TaskList list, String input) throws MithrandirException {
             if (input.isEmpty()) {
-                throw new InvalidArgumentException("Deadline command need 4 parts: task description, '/by', " +
-                        "start time of task and end time of task!");
+                throw new InvalidArgumentException("Deadline command need 3 parts: task description, '/by' and " +
+                        "deadline " +
+                        "of the task!");
             }
             try {
-                chatBot.addDeadlineToList(input);
+                Deadline deadline = new Deadline(input);
+                chatBot.addDeadlineToList(deadline);
+                list.addTask(deadline);
             } catch (MithrandirException e) {
                 throw e;
             }
@@ -86,13 +101,13 @@ public enum Command {
     },
     DELETE {
         @Override
-        public void execute(ChatBot chatBot, String input) throws MithrandirException {
+        public void execute(ChatBot chatBot, TaskList list, String input) throws MithrandirException {
             if (input.isEmpty()) {
                 throw new InvalidArgumentException("DELETE command need EXACTLY ONE integer as argument!");
             }
             try {
                 int index = Integer.parseInt(input.split(" ")[0]) - 1;
-                chatBot.delete(index);
+                chatBot.delete(list.DeleteTask(index));
             } catch (NumberFormatException e) {
                 throw new InvalidArgumentException("DELETE command need one INTEGER as argument!");
             } catch (IndexOutOfBoundsException e) {
@@ -101,5 +116,5 @@ public enum Command {
         }
     }
     ;
-    abstract void execute(ChatBot chatBot, String input) throws MithrandirException;
+    abstract void execute(ChatBot chatBot, TaskList list, String input) throws MithrandirException;
 }

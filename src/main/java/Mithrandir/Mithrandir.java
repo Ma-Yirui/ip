@@ -1,3 +1,5 @@
+package Mithrandir;
+
 import java.io.IOException;
 
 public class Mithrandir {

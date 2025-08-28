@@ -1,4 +1,4 @@
-package task;
+package Mithrandir.task;
 
 public class Deadline extends Task {
     private final String byTime;
@@ -9,6 +9,9 @@ public class Deadline extends Task {
         this.byTime = description.split("/by")[1].trim();
 
     }
+
+    @Override
+    public String toFileString() {return "[T]" + super.toFileString();}
 
     @Override
     public String toString(){
