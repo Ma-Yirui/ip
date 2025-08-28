@@ -2,10 +2,10 @@
 A wizard is never late, nor is he early. He arrives precisely when he means to. Greetings from Gandalf.
 --------------------------------------------------
 --------------------------------------------------
-Added Todo: [T][ ] Write codes
+Added task.Todo: [T][ ] Write codes
 --------------------------------------------------
 --------------------------------------------------
-Added Event: [E][ ] write codes (by: 22/08/2025 1600)
+Added task.Event: [E][ ] write codes (by: 22/08/2025 1600)
 --------------------------------------------------
 --------------------------------------------------
 Added Deadline: [D][ ] submit quiz (from: 15-08-2025 to: 22/Aug/2025)

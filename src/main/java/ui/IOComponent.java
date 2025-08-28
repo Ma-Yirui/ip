@@ -1,3 +1,9 @@
+package ui;
+
+import task.Event;
+import task.Todo;
+import task.Deadline;
+
 public class IOComponent {
     private static final String separator = new String(new char[50]).replace('\0', '-');
 
@@ -22,11 +28,11 @@ public class IOComponent {
     }
 
     public void printAddToList(Todo todo){
-        print("Added Todo: " + todo);
+        print("Added task.Todo: " + todo);
     }
 
     public void printAddToList(Event event){
-        print("Added Event: " + event);
+        print("Added task.Event: " + event);
     }
 
     public void printAddToList(Deadline deadline){
@@ -61,6 +67,6 @@ public class IOComponent {
     }
 
     public void printRemoved(String input){
-        print("Removed Task: " + input);
+        print("Removed task.Task: " + input);
     }
 }

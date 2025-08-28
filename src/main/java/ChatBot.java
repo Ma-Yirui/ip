@@ -1,5 +1,10 @@
 import MithrandirExceptions.InvalidArgumentException;
 import MithrandirExceptions.MithrandirException;
+import task.Event;
+import task.Task;
+import task.Todo;
+import task.Deadline;
+import ui.IOComponent;
 
 import java.util.ArrayList;
 

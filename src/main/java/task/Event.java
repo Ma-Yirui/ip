@@ -1,8 +1,10 @@
-public class Deadline extends Task {
+package task;
+
+public class Event extends Task {
     private final String fromTime;
     private final String toTime;
 
-    public Deadline(String description) {
+    public Event(String description) {
         super(description.split("/from")[0].trim());
         String[] params = description.split("/from")[1].split("/to");
         this.fromTime = params[0].trim();

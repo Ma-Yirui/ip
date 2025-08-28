@@ -1,7 +1,10 @@
-public class Event extends Task {
+package task;
+
+public class Deadline extends Task {
     private final String byTime;
 
-    public Event(String description) {
+
+    public Deadline(String description) {
         super(description.split("/by")[0].trim());
         this.byTime = description.split("/by")[1].trim();
 
