@@ -1,8 +1,11 @@
 package Mithrandir.task;
 
+import java.time.format.DateTimeFormatter;
+
 public class Task {
     private final String description;
     private Boolean isDone = false;
+    protected final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
     public Task(String description) {
         this.description = description;
