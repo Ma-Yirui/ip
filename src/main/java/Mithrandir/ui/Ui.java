@@ -1,4 +1,4 @@
-package Mithrandir;
+package Mithrandir.ui;
 
 import Mithrandir.MithrandirExceptions.InvalidArgumentException;
 import Mithrandir.MithrandirExceptions.MithrandirException;
@@ -6,11 +6,10 @@ import Mithrandir.task.Event;
 import Mithrandir.task.Task;
 import Mithrandir.task.Todo;
 import Mithrandir.task.Deadline;
-import Mithrandir.ui.IOComponent;
 
 import java.util.ArrayList;
 
-public class ChatBot {
+public class Ui {
     private final IOComponent IOComponent =  new IOComponent();
     private final ArrayList<Task> toDoList = new ArrayList<>();
 
