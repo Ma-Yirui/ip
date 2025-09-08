@@ -5,15 +5,14 @@ import java.util.ArrayList;
 import Mithrandir.MithrandirExceptions.InvalidArgumentException;
 import Mithrandir.MithrandirExceptions.MithrandirException;
 import Mithrandir.task.Deadline;
+import Mithrandir.TaskList;
 import Mithrandir.task.Event;
 import Mithrandir.task.Task;
 import Mithrandir.task.Todo;
-import Mithrandir.task.Deadline;
-
-import java.util.ArrayList;
 
 public class Ui {
     private final IOComponent IOComponent =  new IOComponent();
+    private final ArrayList<Task> toDoList = new ArrayList<>();
 
     /**
      * Delegates to the IOComponent to print a greeting message from Gandalf.
@@ -106,5 +105,21 @@ public class Ui {
      */
     public void print(String input) {
         Mithrandir.ui.IOComponent.print(input);
+    }
+
+    /**
+     * Prints the found tasks to the user interface.
+     * This method delegates to the IOComponent to display the search results
+     * in a formatted manner.
+     *
+     * @param foundTasks the TaskList containing the tasks that match the search criteria
+     */
+    public void printFoundTasks(TaskList foundTasks) {
+        String str = foundTasks.toString();
+        if (str.isEmpty()) {
+            this.IOComponent.printNotFoundTasks();
+        } else {
+            this.IOComponent.printFoundTasks(str);
+        }
     }
 }

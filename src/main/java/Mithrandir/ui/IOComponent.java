@@ -101,4 +101,21 @@ public class IOComponent {
     public void printRemoved(String input) {
         print("Removed task.Task: " + input);
     }
+
+    /**
+     * Prints the found tasks with a themed message.
+     *
+     * @param input the string representation of the found tasks to be displayed
+     */
+    public void printFoundTasks(String input){
+        print("Ah… so you seek among your tasks, do you?\n" +
+                "Very well. I shall unveil what lies hidden in your list...\n" + input);
+    }
+
+    public void printNotFoundTasks(){
+        print("""
+                Ah… so you seek among your tasks, do you?
+                Yet I find no record of such a thing in your keeping...
+                Be watchful, for only the tasks you have written may answer your call.""");
+    }
 }
