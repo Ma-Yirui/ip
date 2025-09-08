@@ -6,9 +6,7 @@ import Mithrandir.util.CommandParser;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.stream.Collectors;
 
 public class Application {
     private final Ui ui = new Ui();
