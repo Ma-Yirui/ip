@@ -26,7 +26,14 @@ public class FileStorage {
         this.filePath = Path.of(filePath);
     }
 
-    public void Store(String tasks) throws IOException {
+    /**
+     * Saves the given task data to a file specified by the file path.
+     * Creates the parent directories and the file if they do not already exist.
+     *
+     * @param tasks The string representation of tasks to be stored in the file.
+     * @throws IOException If an I/O error occurs while creating directories, file, or writing to the file.
+     */
+    public void store(String tasks) throws IOException {
         try {
             Files.createDirectories(this.filePath.getParent());
             if (!Files.exists(this.filePath)) {
@@ -40,6 +47,13 @@ public class FileStorage {
         }
     }
 
+    /**
+     * Loads the task list from the file specified by the file path.
+     * If the file does not exist, an empty task list is returned.
+     *
+     * @return The task list loaded from the file.
+     * @throws Exception If an error occurs while reading the file or parsing the task data.
+     */
     public TaskList loadTaskList() throws Exception {
         File file = new File(this.filePath.toString());
         if (!file.exists()) {

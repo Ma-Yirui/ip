@@ -31,6 +31,12 @@ public class Task {
         return isDone;
     }
 
+    /**
+     * Returns a string representation of the task in a format suitable for writing to a file.
+     * The string consists of three parts separated by double pipes: the status of the task (either "done" or "undone"),
+     * the description of the task, and the description of the task.
+     * @return a string representation of the task in a format suitable for writing to a file
+     */
     public String toFileString() {
         return String.format("%s || %s", isMarked() ? "done" : "undone", getDescription());
     }

@@ -7,6 +7,13 @@ public class Deadline extends Task {
     private final LocalDateTime byTime;
 
 
+    /**
+     * Constructs a Deadline object from a string representation of the deadline.
+     *
+     * @param description the string representation of the deadline. It should be in the format
+     *                    "task description /by date and time".
+     * @throws DateTimeParseException if the date and time in the string cannot be parsed.
+     */
     public Deadline(String description) throws DateTimeParseException {
         super(description.split("/by")[0].trim());
         this.byTime = LocalDateTime.parse(description.split("/by")[1].trim(), this.formatter);
