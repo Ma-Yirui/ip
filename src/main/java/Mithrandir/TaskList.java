@@ -35,6 +35,16 @@ public class TaskList {
         return str.toString();
     }
 
+    public TaskList findTasks(String keyword) {
+        TaskList foundTasks = new TaskList();
+        for (Task task : tasks) {
+            if (task.getDescription().contains(keyword)) {
+                foundTasks.addTask(task);
+            }
+        }
+        return foundTasks;
+    }
+
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();

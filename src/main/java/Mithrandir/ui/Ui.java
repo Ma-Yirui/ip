@@ -2,6 +2,7 @@ package Mithrandir.ui;
 
 import Mithrandir.MithrandirExceptions.InvalidArgumentException;
 import Mithrandir.MithrandirExceptions.MithrandirException;
+import Mithrandir.TaskList;
 import Mithrandir.task.Event;
 import Mithrandir.task.Task;
 import Mithrandir.task.Todo;
@@ -59,5 +60,21 @@ public class Ui {
 
     public void print(String input){
         IOComponent.print(input);
+    }
+
+    /**
+     * Prints the found tasks to the user interface.
+     * This method delegates to the IOComponent to display the search results
+     * in a formatted manner.
+     *
+     * @param foundTasks the TaskList containing the tasks that match the search criteria
+     */
+    public void printFoundTasks(TaskList foundTasks) {
+        String str = foundTasks.toString();
+        if (str.isEmpty()) {
+            this.IOComponent.printNotFoundTasks();
+        } else {
+            this.IOComponent.printFoundTasks(str);
+        }
     }
 }

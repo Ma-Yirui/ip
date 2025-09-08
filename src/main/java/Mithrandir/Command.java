@@ -123,6 +123,18 @@ public enum Command {
                 throw new InvalidArgumentException("Index to be deleted is out of bounds of the todo list!");
             }
         }
+    },
+    FIND {
+        @Override
+        public void execute(Ui ui, TaskList list, String input, FileStorage storage) throws MithrandirException, IOException {
+            if (input.isEmpty()) {
+                throw new InvalidArgumentException("FIND command need STRING as argument!");
+            }
+            System.out.println(input);
+            TaskList foundTasks = list.findTasks(input);
+            ui.printFoundTasks(foundTasks);
+        }
+
     }
     ;
     abstract void execute(Ui ui, TaskList list, String input, FileStorage storage) throws MithrandirException, IOException;
