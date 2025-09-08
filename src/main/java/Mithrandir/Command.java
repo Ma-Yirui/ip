@@ -1,19 +1,20 @@
 package Mithrandir;
 
-import Mithrandir.MithrandirExceptions.*;
+import java.io.IOException;
+
+import Mithrandir.MithrandirExceptions.InvalidArgumentException;
+import Mithrandir.MithrandirExceptions.MithrandirException;
 import Mithrandir.storage.FileStorage;
 import Mithrandir.task.Deadline;
 import Mithrandir.task.Event;
 import Mithrandir.task.Todo;
 import Mithrandir.ui.Ui;
 
-import java.io.IOException;
-
 public enum Command {
     BYE {
         @Override
         public void execute(Ui ui, TaskList list, String input, FileStorage storage) throws MithrandirException {
-            if(!input.isEmpty()) {
+            if (!input.isEmpty()) {
                 throw new InvalidArgumentException("BYE command have no argument!");
             }
             ui.exit();
@@ -22,7 +23,7 @@ public enum Command {
     LIST {
         @Override
         public void execute(Ui ui, TaskList list, String input, FileStorage storage) throws MithrandirException {
-            if(!input.isEmpty()) {
+            if (!input.isEmpty()) {
                 throw new InvalidArgumentException("LIST command have no argument!");
             }
             ui.print(list.toString());
@@ -123,7 +124,7 @@ public enum Command {
                 throw new InvalidArgumentException("Index to be deleted is out of bounds of the todo list!");
             }
         }
-    }
-    ;
+    };
+
     abstract void execute(Ui ui, TaskList list, String input, FileStorage storage) throws MithrandirException, IOException;
 }

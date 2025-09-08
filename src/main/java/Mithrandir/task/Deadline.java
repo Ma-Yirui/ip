@@ -1,8 +1,6 @@
 package Mithrandir.task;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
@@ -20,7 +18,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return String.format("[D]%s (by: %s)", super.toString(), this.byTime.format(this.formatter));
     }
 }

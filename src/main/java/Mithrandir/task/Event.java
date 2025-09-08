@@ -1,6 +1,5 @@
 package Mithrandir.task;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
@@ -17,7 +16,7 @@ public class Event extends Task {
 
     @Override
     public String toFileString() {
-        return "EVENT || " + super.toFileString() +  String.format(" /from %s /to %s)",
+        return "EVENT || " + super.toFileString() + String.format(" /from %s /to %s)",
                 this.fromTime.format(this.formatter), this.toTime.format(this.formatter));
     }
 

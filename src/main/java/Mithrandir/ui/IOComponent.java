@@ -1,8 +1,8 @@
 package Mithrandir.ui;
 
-import Mithrandir.task.Todo;
-import Mithrandir.task.Event;
 import Mithrandir.task.Deadline;
+import Mithrandir.task.Event;
+import Mithrandir.task.Todo;
 
 public class IOComponent {
     private static final String separator = new String(new char[50]).replace('\0', '-');
@@ -19,54 +19,54 @@ public class IOComponent {
                 + "Greetings from Gandalf.");
     }
 
-    public void exit(){
+    public void exit() {
         print("Farewell. My work is now finished.");
     }
 
-    public void echo(String input){
+    public void echo(String input) {
         print(input);
     }
 
-    public void printAddToList(Todo todo){
+    public void printAddToList(Todo todo) {
         print("Added Todo: " + todo);
     }
 
-    public void printAddToList(Event event){
+    public void printAddToList(Event event) {
         print("Added Event: " + event);
     }
 
-    public void printAddToList(Deadline deadline){
+    public void printAddToList(Deadline deadline) {
         print("Added Deadline: " + deadline);
     }
 
-    public void printList(String[] input){
+    public void printList(String[] input) {
         System.out.println(separator);
-        for (int i = 0; i < input.length; i+=1){
+        for (int i = 0; i < input.length; i += 1) {
             System.out.println(String.format("%d.", i + 1) + input[i].trim());
         }
         System.out.println(separator);
     }
 
-    public void printMarkDoneSuccessful(String input){
+    public void printMarkDoneSuccessful(String input) {
         print("Well done! The following task is deemed complete:\n" + input);
     }
 
-    public void printMarkDoneUnsuccessful(){
+    public void printMarkDoneUnsuccessful() {
         print("You cannot mark one task repeatedly!");
     }
 
-    public void printMarkUndoneSuccessful(String input){
+    public void printMarkUndoneSuccessful(String input) {
         System.out.println(separator);
         System.out.println("Alas! It's the job that's never started as takes longest to finish. This task is " +
                 "marked undone:\n" + input);
         System.out.println(separator);
     }
 
-    public void printMarkUndoneUnsuccessful(){
+    public void printMarkUndoneUnsuccessful() {
         print("You cannot unmark one task repeatedly!");
     }
 
-    public void printRemoved(String input){
+    public void printRemoved(String input) {
         print("Removed task.Task: " + input);
     }
 }

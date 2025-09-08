@@ -1,23 +1,23 @@
 package Mithrandir.ui;
 
+import java.util.ArrayList;
+
 import Mithrandir.MithrandirExceptions.InvalidArgumentException;
 import Mithrandir.MithrandirExceptions.MithrandirException;
+import Mithrandir.task.Deadline;
 import Mithrandir.task.Event;
 import Mithrandir.task.Task;
 import Mithrandir.task.Todo;
-import Mithrandir.task.Deadline;
-
-import java.util.ArrayList;
 
 public class Ui {
-    private final IOComponent IOComponent =  new IOComponent();
+    private final IOComponent IOComponent = new IOComponent();
     private final ArrayList<Task> toDoList = new ArrayList<>();
 
-    public void greet(){
+    public void greet() {
         this.IOComponent.greet();
     }
 
-    public void addTodoToList(Todo todo){
+    public void addTodoToList(Todo todo) {
         this.IOComponent.printAddToList(todo);
     }
 
@@ -41,7 +41,7 @@ public class Ui {
 
     }
 
-    public void exit(){
+    public void exit() {
         this.IOComponent.exit();
     }
 
@@ -57,7 +57,7 @@ public class Ui {
         this.IOComponent.printRemoved(task.toString());
     }
 
-    public void print(String input){
-        IOComponent.print(input);
+    public void print(String input) {
+        Mithrandir.ui.IOComponent.print(input);
     }
 }

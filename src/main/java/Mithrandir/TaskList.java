@@ -1,11 +1,11 @@
 package Mithrandir;
 
-import Mithrandir.task.Task;
-
 import java.util.ArrayList;
 
+import Mithrandir.task.Task;
+
 public class TaskList {
-    private ArrayList<Task> tasks =  new ArrayList<>();
+    private ArrayList<Task> tasks = new ArrayList<>();
 
     public void addTask(Task task) {
         tasks.add(task);
