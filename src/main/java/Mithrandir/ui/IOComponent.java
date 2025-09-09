@@ -108,13 +108,13 @@ public class IOComponent {
      * @param input the string representation of the found tasks to be displayed
      */
     public void printFoundTasks(String input){
-        print("Ah… so you seek among your tasks, do you?\n" +
+        print("Ah... so you seek among your tasks, do you?\n" +
                 "Very well. I shall unveil what lies hidden in your list...\n" + input);
     }
 
     public void printNotFoundTasks(){
         print("""
-                Ah… so you seek among your tasks, do you?
+                Ah... so you seek among your tasks, do you?
                 Yet I find no record of such a thing in your keeping...
                 Be watchful, for only the tasks you have written may answer your call.""");
     }

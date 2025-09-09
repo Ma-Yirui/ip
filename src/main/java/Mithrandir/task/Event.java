@@ -3,6 +3,10 @@ package Mithrandir.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
+import Mithrandir.MithrandirExceptions.InvalidArgumentException;
+import Mithrandir.MithrandirExceptions.DateTimeFormatException;
+import Mithrandir.MithrandirExceptions.MithrandirException;
+
 public class Event extends Task {
     private final LocalDateTime fromTime;
     private final LocalDateTime toTime;
@@ -18,11 +22,19 @@ public class Event extends Task {
      * @throws DateTimeParseException if the start time or end time in the description
      *                                cannot be parsed into a LocalDateTime object.
      */
-    public Event(String description) throws DateTimeParseException {
+    public Event(String description) throws MithrandirException {
         super(description.split("/from")[0].trim());
         String[] params = description.split("/from")[1].split("/to");
-        this.fromTime = LocalDateTime.parse(params[0].trim(), this.formatter);
-        this.toTime = LocalDateTime.parse(params[1].trim(), this.formatter);
+        if (params.length != 2) {
+            throw new InvalidArgumentException("Invalid event format. Please use the format: " +
+                    "task description /from start time /to end time.");
+        }
+        try {
+            this.fromTime = LocalDateTime.parse(params[0].trim(), this.formatter);
+            this.toTime = LocalDateTime.parse(params[1].trim(), this.formatter);
+        } catch (DateTimeParseException e) {
+            throw new DateTimeFormatException("Invalid date format. Please use the format: dd/MM/yyyy HH:mm.");
+        }
     }
 
     @Override

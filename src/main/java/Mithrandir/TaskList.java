@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import Mithrandir.task.Task;
 
 public class TaskList {
-    private ArrayList<Task> tasks = new ArrayList<>();
+    private final ArrayList<Task> tasks = new ArrayList<>();
 
     /**
      * Adds a task to the task list.
@@ -71,11 +71,23 @@ public class TaskList {
     public TaskList findTasks(String keyword) {
         TaskList foundTasks = new TaskList();
         for (Task task : tasks) {
-            if (task.getDescription().contains(keyword)) {
+            if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
                 foundTasks.addTask(task);
             }
         }
         return foundTasks;
+    }
+
+    public int getSize() {
+        return this.tasks.size();
+    }
+
+    public ArrayList<Task> getTasks() {
+        return this.tasks;
+    }
+
+    public boolean isEmpty() {
+        return this.tasks.isEmpty();
     }
 
     @Override

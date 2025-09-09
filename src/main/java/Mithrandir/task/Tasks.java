@@ -1,5 +1,8 @@
 package Mithrandir.task;
 
+import Mithrandir.MithrandirExceptions.InvalidArgumentException;
+import Mithrandir.MithrandirExceptions.MithrandirException;
+
 public enum Tasks {
     TODO {
         /**
@@ -39,7 +42,7 @@ public enum Tasks {
          * @throws IllegalArgumentException If the completion status is neither "done" nor "undone".
          */
         @Override
-        public Task createTask(String completionStatus, String description) {
+        public Task createTask(String completionStatus, String description) throws MithrandirException {
             Event newTask = new Event(description);
             if (completionStatus.equals("done")) {
                 newTask.markDone();
@@ -64,7 +67,7 @@ public enum Tasks {
          * @throws IllegalArgumentException If the completion status is neither "done" nor "undone".
          */
         @Override
-        public Task createTask(String completionStatus, String description) {
+        public Task createTask(String completionStatus, String description) throws InvalidArgumentException {
             Deadline newTask = new Deadline(description);
             if (completionStatus.equals("done")) {
                 newTask.markDone();

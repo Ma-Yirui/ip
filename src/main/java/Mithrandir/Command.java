@@ -10,8 +10,6 @@ import Mithrandir.task.Event;
 import Mithrandir.task.Todo;
 import Mithrandir.ui.Ui;
 
-import java.io.IOException;
-
 public enum Command {
     BYE {
         /**
@@ -46,7 +44,11 @@ public enum Command {
             if (!input.isEmpty()) {
                 throw new InvalidArgumentException("LIST command have no argument!");
             }
-            ui.print(list.toString());
+            if (list.isEmpty()) {
+                ui.print("No tasks in the list.");
+            } else {
+                ui.print(list.toString());
+            }
         }
     },
     MARK {
@@ -209,7 +211,7 @@ public enum Command {
     },
     FIND {
         @Override
-        public void execute(Ui ui, TaskList list, String input, FileStorage storage) throws MithrandirException, IOException {
+        public void execute(Ui ui, TaskList list, String input, FileStorage storage) throws MithrandirException {
             if (input.isEmpty()) {
                 throw new InvalidArgumentException("FIND command need STRING as argument!");
             }

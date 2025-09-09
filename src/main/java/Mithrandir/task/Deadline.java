@@ -3,6 +3,8 @@ package Mithrandir.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
+import Mithrandir.MithrandirExceptions.InvalidArgumentException;
+
 public class Deadline extends Task {
     private final LocalDateTime byTime;
 
@@ -14,9 +16,14 @@ public class Deadline extends Task {
      *                    "task description /by date and time".
      * @throws DateTimeParseException if the date and time in the string cannot be parsed.
      */
-    public Deadline(String description) throws DateTimeParseException {
+    public Deadline(String description) throws DateTimeParseException, InvalidArgumentException {
         super(description.split("/by")[0].trim());
-        this.byTime = LocalDateTime.parse(description.split("/by")[1].trim(), this.formatter);
+        try {
+            this.byTime = LocalDateTime.parse(description.split("/by")[1].trim(), this.formatter);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidArgumentException("Deadline command need 3 parts: task description, '/by' and deadline, " +
+                    "you are missing on something. Check your command!");
+        }
     }
 
     @Override
