@@ -17,8 +17,8 @@ public class Ui {
     /**
      * Delegates to the IOComponent to print a greeting message from Gandalf.
      */
-    public void greet() {
-        this.IOComponent.greet();
+    public String greet() {
+        return this.IOComponent.greet();
     }
 
     /**
@@ -26,8 +26,8 @@ public class Ui {
      *
      * @param todo the Todo task to be added
      */
-    public void addTodoToList(Todo todo) {
-        this.IOComponent.printAddToList(todo);
+    public String addTodoToList(Todo todo) {
+        return this.IOComponent.printAddToList(todo);
     }
 
     /**
@@ -37,13 +37,13 @@ public class Ui {
      * @param event the Event task to be added
      * @throws MithrandirException if the command format is invalid
      */
-    public void addEventToList(Event event) throws MithrandirException {
+    public String addEventToList(Event event) throws MithrandirException {
         try {
-            this.IOComponent.printAddToList(event);
+            return this.IOComponent.printAddToList(event);
         } catch (IndexOutOfBoundsException e) {
-            throw new InvalidArgumentException("Event command need 4 parts: task description, " +
+            return "Event command need 4 parts: task description, " +
                     "'/from', Start time of" +
-                    " task and end time of task. You are missing on something. Check your command!");
+                    " task and end time of task. You are missing on something. Check your command!";
         }
     }
 
@@ -54,20 +54,20 @@ public class Ui {
      * @param deadline the Deadline task to be added
      * @throws MithrandirException if the command format is invalid
      */
-    public void addDeadlineToList(Deadline deadline) throws MithrandirException {
+    public String addDeadlineToList(Deadline deadline) throws MithrandirException {
         try {
-            this.IOComponent.printAddToList(deadline);
+            return this.IOComponent.printAddToList(deadline);
         } catch (IndexOutOfBoundsException e) {
-            throw new InvalidArgumentException("Deadline command need 3 parts: task description, '/by' and deadline, " +
-                    "you are missing on something. Check your command!");
+            return "Deadline command need 3 parts: task description, '/by' and deadline, " +
+                    "you are missing on something. Check your command!";
         }
     }
 
     /**
      * Delegates to the IOComponent to print a farewell message.
      */
-    public void exit() {
-        this.IOComponent.exit();
+    public String exit() {
+        return this.IOComponent.exit();
     }
 
     /**
@@ -75,8 +75,8 @@ public class Ui {
      *
      * @param task the task to be marked as done
      */
-    public void mark(Task task) {
-        this.IOComponent.printMarkDoneSuccessful(task.toString());
+    public String mark(Task task) {
+        return this.IOComponent.printMarkDoneSuccessful(task.toString());
     }
 
     /**
@@ -84,8 +84,8 @@ public class Ui {
      *
      * @param task the task to be marked as undone
      */
-    public void unmark(Task task) {
-        this.IOComponent.printMarkUndoneSuccessful(task.toString());
+    public String unmark(Task task) {
+        return this.IOComponent.printMarkUndoneSuccessful(task.toString());
     }
 
     /**
@@ -94,8 +94,8 @@ public class Ui {
      * @param task the task to be deleted
      * @throws IndexOutOfBoundsException if the task index is invalid
      */
-    public void delete(Task task) throws IndexOutOfBoundsException {
-        this.IOComponent.printRemoved(task.toString());
+    public String delete(Task task) throws IndexOutOfBoundsException {
+        return this.IOComponent.printRemoved(task.toString());
     }
 
     /**
@@ -103,8 +103,9 @@ public class Ui {
      *
      * @param input the message to be printed
      */
-    public void print(String input) {
+    public String print(String input) {
         Mithrandir.ui.IOComponent.print(input);
+        return input;
     }
 
     /**
@@ -114,12 +115,12 @@ public class Ui {
      *
      * @param foundTasks the TaskList containing the tasks that match the search criteria
      */
-    public void printFoundTasks(TaskList foundTasks) {
+    public String printFoundTasks(TaskList foundTasks) {
         String str = foundTasks.toString();
         if (str.isEmpty()) {
-            this.IOComponent.printNotFoundTasks();
+            return this.IOComponent.printNotFoundTasks();
         } else {
-            this.IOComponent.printFoundTasks(str);
+            return this.IOComponent.printFoundTasks(str);
         }
     }
 }

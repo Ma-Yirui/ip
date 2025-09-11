@@ -15,7 +15,11 @@ import javafx.stage.Stage;
  */
 public class GUi extends Application {
 
-    private Ui mithrandir = new Ui();
+    private Mithrandir.Application mithrandir;
+
+    public GUi() {
+        mithrandir = new Mithrandir.Application();
+    }
 
     @Override
     public void start(Stage stage) {
@@ -26,6 +30,7 @@ public class GUi extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setMithrandir(mithrandir);
             stage.show();
+            fxmlLoader.<MainWindow>getController().greet();
         } catch (IOException e) {
             e.printStackTrace();
         }

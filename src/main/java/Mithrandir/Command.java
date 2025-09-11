@@ -22,11 +22,11 @@ public enum Command {
          * @throws InvalidArgumentException if input is not empty
          */
         @Override
-        public void execute(Ui ui, TaskList list, String input, FileStorage storage) throws MithrandirException {
+        public String execute(Ui ui, TaskList list, String input, FileStorage storage) throws MithrandirException {
             if (!input.isEmpty()) {
-                throw new InvalidArgumentException("BYE command have no argument!");
+                return "BYE command have no argument!";
             }
-            ui.exit();
+            return ui.exit();
         }
     },
     LIST {
@@ -40,14 +40,14 @@ public enum Command {
          * @throws InvalidArgumentException if input is not empty
          */
         @Override
-        public void execute(Ui ui, TaskList list, String input, FileStorage storage) throws MithrandirException {
+        public String execute(Ui ui, TaskList list, String input, FileStorage storage) throws MithrandirException {
             if (!input.isEmpty()) {
-                throw new InvalidArgumentException("LIST command have no argument!");
+                return "LIST command have no argument!";
             }
             if (list.isEmpty()) {
-                ui.print("No tasks in the list.");
+                return ui.print("No tasks in the list.");
             } else {
-                ui.print(list.toString());
+                return ui.print(list.toString());
             }
         }
     },
@@ -63,17 +63,19 @@ public enum Command {
          * @throws IOException if an error occurs while saving to storage
          */
         @Override
-        public void execute(Ui ui, TaskList list, String input, FileStorage storage) throws MithrandirException, IOException {
+        public String execute(Ui ui, TaskList list, String input, FileStorage storage) throws MithrandirException,
+                IOException {
             if (input.isEmpty()) {
-                throw new InvalidArgumentException("MARK command need EXACTLY ONE integer as argument!");
+                return "MARK command need EXACTLY ONE integer as argument!";
             }
             try {
                 int index = Integer.parseInt(input.split(" ")[0]) - 1;
                 list.Mark(index);
-                ui.mark(list.getTask(index));
+                String result = ui.mark(list.getTask(index));
                 storage.store(list.generateFileStrings());
+                return result;
             } catch (NumberFormatException e) {
-                throw new InvalidArgumentException("MARK command need one INTEGER as argument!");
+                return "MARK command need one INTEGER as argument!";
             }
         }
     },
@@ -89,17 +91,19 @@ public enum Command {
          * @throws IOException if an error occurs while saving to storage
          */
         @Override
-        public void execute(Ui ui, TaskList list, String input, FileStorage storage) throws MithrandirException, IOException {
+        public String execute(Ui ui, TaskList list, String input, FileStorage storage) throws MithrandirException,
+                IOException {
             if (input.isEmpty()) {
-                throw new InvalidArgumentException("UNMARK command need EXACTLY ONE integer as argument!");
+                return "UNMARK command need EXACTLY ONE integer as argument!";
             }
             try {
                 int index = Integer.parseInt(input.split(" ")[0]) - 1;
                 list.Unmark(index);
-                ui.unmark(list.getTask(index));
+                String result = ui.unmark(list.getTask(index));
                 storage.store(list.generateFileStrings());
+                return result;
             } catch (NumberFormatException e) {
-                throw new InvalidArgumentException("UNMARK command need one INTEGER as argument!");
+                return "UNMARK command need one INTEGER as argument!";
             }
         }
     },
@@ -115,14 +119,16 @@ public enum Command {
          * @throws IOException if an error occurs while saving to storage
          */
         @Override
-        public void execute(Ui ui, TaskList list, String input, FileStorage storage) throws MithrandirException, IOException {
+        public String execute(Ui ui, TaskList list, String input, FileStorage storage) throws MithrandirException,
+                IOException {
             if (input.isEmpty()) {
-                throw new InvalidArgumentException("TODO command need STRING as Mithrandir.task description!");
+                return "TODO command need STRING as Mithrandir.task description!";
             }
             Todo todo = new Todo(input);
-            ui.addTodoToList(todo);
+            String result = ui.addTodoToList(todo);
             list.addTask(todo);
             storage.store(list.generateFileStrings());
+            return result;
         }
     },
     EVENT {
@@ -138,18 +144,20 @@ public enum Command {
          * @throws IOException if an error occurs while saving to storage
          */
         @Override
-        public void execute(Ui ui, TaskList list, String input, FileStorage storage) throws MithrandirException, IOException {
+        public String execute(Ui ui, TaskList list, String input, FileStorage storage) throws MithrandirException,
+                IOException {
             if (input.isEmpty()) {
-                throw new InvalidArgumentException("Event command need 4 parts: task description, '/by', " +
-                        "start time of task and end time of task!");
+                return "Event command need 4 parts: task description, '/by', " +
+                        "start time of task and end time of task!";
             }
             try {
                 Event event = new Event(input);
-                ui.addEventToList(event);
+                String result = ui.addEventToList(event);
                 list.addTask(event);
                 storage.store(list.generateFileStrings());
+                return result;
             } catch (MithrandirException e) {
-                throw e;
+                return e.getMessage();
             }
         }
     },
@@ -166,19 +174,21 @@ public enum Command {
          * @throws IOException if an error occurs while saving to storage
          */
         @Override
-        public void execute(Ui ui, TaskList list, String input, FileStorage storage) throws MithrandirException, IOException {
+        public String execute(Ui ui, TaskList list, String input, FileStorage storage) throws MithrandirException,
+                IOException {
             if (input.isEmpty()) {
-                throw new InvalidArgumentException("Deadline command need 3 parts: task description, '/by' and " +
+                return "Deadline command need 3 parts: task description, '/by' and " +
                         "deadline " +
-                        "of the task!");
+                        "of the task!";
             }
             try {
                 Deadline deadline = new Deadline(input);
-                ui.addDeadlineToList(deadline);
+                String result = ui.addDeadlineToList(deadline);
                 list.addTask(deadline);
                 storage.store(list.generateFileStrings());
+                return result;
             } catch (MithrandirException e) {
-                throw e;
+                return e.getMessage();
             }
         }
     },
@@ -194,33 +204,36 @@ public enum Command {
          * @throws IOException if an error occurs while saving to storage
          */
         @Override
-        public void execute(Ui ui, TaskList list, String input, FileStorage storage) throws MithrandirException, IOException {
+        public String execute(Ui ui, TaskList list, String input, FileStorage storage) throws MithrandirException,
+                IOException {
             if (input.isEmpty()) {
-                throw new InvalidArgumentException("DELETE command need EXACTLY ONE integer as argument!");
+                return "DELETE command need EXACTLY ONE integer as argument!";
             }
             try {
                 int index = Integer.parseInt(input.split(" ")[0]) - 1;
-                ui.delete(list.DeleteTask(index));
+                String result = ui.delete(list.DeleteTask(index));
                 storage.store(list.generateFileStrings());
+                return result;
             } catch (NumberFormatException e) {
-                throw new InvalidArgumentException("DELETE command need one INTEGER as argument!");
+                return "DELETE command need one INTEGER as argument!";
             } catch (IndexOutOfBoundsException e) {
-                throw new InvalidArgumentException("Index to be deleted is out of bounds of the todo list!");
+                return "Index to be deleted is out of bounds of the todo list!";
             }
         }
     },
     FIND {
         @Override
-        public void execute(Ui ui, TaskList list, String input, FileStorage storage) throws MithrandirException {
+        public String execute(Ui ui, TaskList list, String input, FileStorage storage) throws MithrandirException {
             if (input.isEmpty()) {
                 throw new InvalidArgumentException("FIND command need STRING as argument!");
             }
             System.out.println(input);
             TaskList foundTasks = list.findTasks(input);
-            ui.printFoundTasks(foundTasks);
+            return ui.printFoundTasks(foundTasks);
         }
 
     }
     ;
-    abstract void execute(Ui ui, TaskList list, String input, FileStorage storage) throws MithrandirException, IOException;
+    abstract String execute(Ui ui, TaskList list, String input, FileStorage storage) throws MithrandirException,
+            IOException;
 }

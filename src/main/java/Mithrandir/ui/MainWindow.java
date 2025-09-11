@@ -2,7 +2,7 @@ package Mithrandir.ui;
 
 import java.util.Objects;
 
-import Mithrandir.Mithrandir;
+import Mithrandir.Application;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -21,7 +21,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Ui mithrandir;
+    private Application mithrandir;
 
     private Image userImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/Frodo" +
             ".png")));
@@ -35,13 +35,18 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void handleUserInput() {
         String input = userInput.getText();
-        String response = "Dummy Response";
+        String response = this.mithrandir.getGUiResponse(input);
         dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
         dialogContainer.getChildren().add(DialogBox.getMithrandirDialog(response, mithrandirImage));
         userInput.clear();
     }
 
-    public void setMithrandir(Ui mithrandir) {
+    @FXML
+    public void greet() {
+        dialogContainer.getChildren().add(DialogBox.getMithrandirDialog(this.mithrandir.greet(), mithrandirImage));
+    }
+
+    public void setMithrandir(Application mithrandir) {
         this.mithrandir = mithrandir;
     }
 }

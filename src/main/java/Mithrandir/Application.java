@@ -39,4 +39,28 @@ public class Application {
             nextLine = bufferedReader.readLine();
         }
     }
+
+    public String getGUiResponse(String input) {
+        HashMap<String, String> command = CommandParser.parse(input);
+        try {
+            if (!command.get("command word").equals("BYE")) {
+                return Command.valueOf(command.get("command word")).execute(this.ui, this.taskList,
+                        command.get("description"), this.fileStorage);
+            }
+            javafx.application.Platform.exit();
+        } catch (Exception e) {
+            if (e.getMessage().contains("No enum constant")) {
+                return ui.print("No such command! Supported commands are: TODO, EVENT, DEADLINE, BYE, LIST, MARK, " +
+                        "UNMARK");
+            } else {
+                return ui.print(e.getMessage());
+            }
+
+        }
+        return "Dummy Response";
+    }
+
+    public String greet() {
+        return this.ui.greet();
+    }
 }

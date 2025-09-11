@@ -12,17 +12,18 @@ public class IOComponent {
      *
      * @param message the message to be printed
      */
-    public static void print(String message) {
+    public static String print(String message) {
         System.out.println(separator);
         System.out.println(message);
         System.out.println(separator);
+        return message;
     }
 
     /**
      * Prints a greeting message from Gandalf.
      */
-    public void greet() {
-        print("A wizard is never late, nor is he early. "
+    public String greet() {
+        return print("A wizard is never late, nor is he early. "
                 + "He arrives precisely when he means to. "
                 + "Greetings from Gandalf.");
     }
@@ -30,8 +31,8 @@ public class IOComponent {
     /**
      * Prints a farewell message from Gandalf.
      */
-    public void exit() {
-        print("Farewell. My work is now finished.");
+    public String exit() {
+        return print("Farewell. My work is now finished.");
     }
 
     /**
@@ -39,8 +40,8 @@ public class IOComponent {
      *
      * @param todo the Todo task that has been added
      */
-    public void printAddToList(Todo todo) {
-        print("Added Todo: " + todo);
+    public String printAddToList(Todo todo) {
+        return print("Added Todo: " + todo);
     }
 
     /**
@@ -48,8 +49,8 @@ public class IOComponent {
      *
      * @param event the Event task that has been added
      */
-    public void printAddToList(Event event) {
-        print("Added Event: " + event);
+    public String printAddToList(Event event) {
+        return print("Added Event: " + event);
     }
 
     /**
@@ -57,21 +58,8 @@ public class IOComponent {
      *
      * @param deadline the Deadline task that has been added
      */
-    public void printAddToList(Deadline deadline) {
-        print("Added Deadline: " + deadline);
-    }
-
-    /**
-     * Prints a list of strings, each prefixed with its index in the list.
-     *
-     * @param input an array of strings to be printed
-     */
-    public void printList(String[] input) {
-        System.out.println(separator);
-        for (int i = 0; i < input.length; i++) {
-            System.out.printf("%d. %s%n", i + 1, input[i].trim());
-        }
-        System.out.println(separator);
+    public String printAddToList(Deadline deadline) {
+        return print("Added Deadline: " + deadline);
     }
 
     /**
@@ -79,8 +67,8 @@ public class IOComponent {
      *
      * @param input a string representation of the task that has been marked done
      */
-    public void printMarkDoneSuccessful(String input) {
-        print("Well done! The following task is deemed complete:\n" + input);
+    public String printMarkDoneSuccessful(String input) {
+        return print("Well done! The following task is deemed complete:\n" + input);
     }
 
     /**
@@ -88,8 +76,8 @@ public class IOComponent {
      *
      * @param input a string representation of the task that has been marked undone
      */
-    public void printMarkUndoneSuccessful(String input) {
-        print("Alas! It's the job that's never started as takes longest to finish. This task is " +
+    public String printMarkUndoneSuccessful(String input) {
+        return print("Alas! It's the job that's never started as takes longest to finish. This task is " +
                 "marked undone:\n" + input);
     }
 
@@ -98,8 +86,8 @@ public class IOComponent {
      *
      * @param input a string representation of the task that has been removed
      */
-    public void printRemoved(String input) {
-        print("Removed task.Task: " + input);
+    public String printRemoved(String input) {
+        return print("Removed task.Task: " + input);
     }
 
     /**
@@ -107,13 +95,13 @@ public class IOComponent {
      *
      * @param input the string representation of the found tasks to be displayed
      */
-    public void printFoundTasks(String input){
-        print("Ah... so you seek among your tasks, do you?\n" +
+    public String printFoundTasks(String input){
+        return print("Ah... so you seek among your tasks, do you?\n" +
                 "Very well. I shall unveil what lies hidden in your list...\n" + input);
     }
 
-    public void printNotFoundTasks(){
-        print("""
+    public String printNotFoundTasks(){
+        return print("""
                 Ah... so you seek among your tasks, do you?
                 Yet I find no record of such a thing in your keeping...
                 Be watchful, for only the tasks you have written may answer your call.""");
