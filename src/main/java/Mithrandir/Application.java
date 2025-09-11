@@ -14,9 +14,17 @@ public class Application {
     private TaskList taskList = new TaskList();
     private final FileStorage fileStorage = new FileStorage("./Save/Save.txt");
 
+    /**
+     * Starts the application and processes user input.
+     *
+     * @throws Exception if an I/O error occurs
+     * @throws AssertionError if required components are not properly initialized
+     */
     public void run() throws Exception {
+
         ui.greet();
         this.taskList = fileStorage.loadTaskList();
+        assert taskList != null : "TaskList must be properly loaded from storage";
         String nextLine = bufferedReader.readLine();
         while (nextLine != null) {
             nextLine = nextLine.trim();
@@ -40,7 +48,17 @@ public class Application {
         }
     }
 
+    /**
+     * Processes a GUI command and returns the response.
+     *
+     * @param input the user input to process
+     * @return the response to display in the GUI
+     * @throws AssertionError if input is null or empty, or if required components are not initialized
+     */
     public String getGUiResponse(String input) {
+        assert input != null && !input.trim().isEmpty() : "Input cannot be null or empty";
+        assert taskList != null : "TaskList must be initialized";
+
         HashMap<String, String> command = CommandParser.parse(input);
         try {
             if (!command.get("command word").equals("BYE")) {
@@ -57,7 +75,7 @@ public class Application {
             }
 
         }
-        return "Dummy Response";
+        return "Gibberish";
     }
 
     public String greet() {
