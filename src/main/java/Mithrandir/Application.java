@@ -11,8 +11,12 @@ import Mithrandir.util.CommandParser;
 public class Application {
     private final Ui ui = new Ui();
     private final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-    private final FileStorage fileStorage = new FileStorage("./Save/Save.txt");
+    private final FileStorage fileStorage = new FileStorage("./save/Save.txt", "./save/Archive.txt");
     private TaskList taskList = new TaskList();
+
+    public void loadTaskList() throws Exception{
+        this.taskList = fileStorage.loadTaskList();
+    }
 
     /**
      * Starts the application and processes user input.
@@ -23,7 +27,7 @@ public class Application {
     public void run() throws Exception {
 
         ui.greet();
-        this.taskList = fileStorage.loadTaskList();
+        loadTaskList();
         assert taskList != null : "TaskList must be properly loaded from storage";
         String nextLine = bufferedReader.readLine();
         while (nextLine != null) {

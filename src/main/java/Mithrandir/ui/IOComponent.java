@@ -130,4 +130,9 @@ public class IOComponent {
                 Yet I find no record of such a thing in your keeping...
                 Be watchful, for only the tasks you have written may answer your call.""");
     }
+
+    public String printArchived(String input) {
+        return print("Archived task: " + input +
+                "\nthe task is now sealed away in the vaults of memory, never again to trouble your road ahead.");
+    }
 }

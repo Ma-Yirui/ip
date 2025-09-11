@@ -7,6 +7,7 @@ import Mithrandir.MithrandirExceptions.MithrandirException;
 import Mithrandir.storage.FileStorage;
 import Mithrandir.task.Deadline;
 import Mithrandir.task.Event;
+import Mithrandir.task.Task;
 import Mithrandir.task.Todo;
 import Mithrandir.ui.Ui;
 
@@ -72,7 +73,7 @@ public enum Command {
                 int index = Integer.parseInt(input.split(" ")[0]) - 1;
                 list.Mark(index);
                 String result = ui.mark(list.getTask(index));
-                storage.store(list.generateFileStrings());
+                storage.store(list.generateFileStrings(), false);
                 return result;
             } catch (NumberFormatException e) {
                 return "MARK command need one INTEGER as argument!";
@@ -100,7 +101,7 @@ public enum Command {
                 int index = Integer.parseInt(input.split(" ")[0]) - 1;
                 list.Unmark(index);
                 String result = ui.unmark(list.getTask(index));
-                storage.store(list.generateFileStrings());
+                storage.store(list.generateFileStrings(), false);
                 return result;
             } catch (NumberFormatException e) {
                 return "UNMARK command need one INTEGER as argument!";
@@ -127,7 +128,7 @@ public enum Command {
             Todo todo = new Todo(input);
             String result = ui.addTodoToList(todo);
             list.addTask(todo);
-            storage.store(list.generateFileStrings());
+            storage.store(list.generateFileStrings(), false);
             return result;
         }
     },
@@ -154,7 +155,7 @@ public enum Command {
                 Event event = new Event(input);
                 String result = ui.addEventToList(event);
                 list.addTask(event);
-                storage.store(list.generateFileStrings());
+                storage.store(list.generateFileStrings(), false);
                 return result;
             } catch (MithrandirException e) {
                 return e.getMessage();
@@ -185,7 +186,7 @@ public enum Command {
                 Deadline deadline = new Deadline(input);
                 String result = ui.addDeadlineToList(deadline);
                 list.addTask(deadline);
-                storage.store(list.generateFileStrings());
+                storage.store(list.generateFileStrings(), false);
                 return result;
             } catch (MithrandirException e) {
                 return e.getMessage();
@@ -212,7 +213,7 @@ public enum Command {
             try {
                 int index = Integer.parseInt(input.split(" ")[0]) - 1;
                 String result = ui.delete(list.DeleteTask(index));
-                storage.store(list.generateFileStrings());
+                storage.store(list.generateFileStrings(), false);
                 return result;
             } catch (NumberFormatException e) {
                 return "DELETE command need one INTEGER as argument!";
@@ -225,13 +226,32 @@ public enum Command {
         @Override
         public String execute(Ui ui, TaskList list, String input, FileStorage storage) throws MithrandirException {
             if (input.isEmpty()) {
-                throw new InvalidArgumentException("FIND command need STRING as argument!");
+                return "FIND command need STRING as argument!";
             }
-            System.out.println(input);
             TaskList foundTasks = list.findTasks(input);
             return ui.printFoundTasks(foundTasks);
         }
-
+    },
+    ARCHIVE {
+        @Override
+        public String execute(Ui ui, TaskList list, String input, FileStorage storage) throws MithrandirException, IOException {
+            if (input.isEmpty()) {
+                return "ARCHIVE command need EXACTLY ONE integer as argument!";
+            }
+            try {
+                int index = Integer.parseInt(input.split(" ")[0]) - 1;
+                Task archivedTask = list.getTask(index);
+                ui.delete(list.DeleteTask(index));
+                String result = ui.archive(archivedTask);
+                storage.store(list.generateFileStrings(), false);
+                storage.store(archivedTask.toFileString(), true);
+                return result;
+            } catch (NumberFormatException e) {
+                return "DELETE command need one INTEGER as argument!";
+            } catch (IndexOutOfBoundsException e) {
+                return "Index to be deleted is out of bounds of the todo list!";
+            }
+        }
     };
 
     abstract String execute(Ui ui, TaskList list, String input, FileStorage storage) throws MithrandirException,
