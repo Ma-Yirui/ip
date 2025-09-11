@@ -7,7 +7,14 @@ public class Task {
     private final String description;
     private Boolean isDone = false;
 
+    /**
+     * Constructs a new Task with the given description.
+     *
+     * @param description the description of the task (cannot be null or empty)
+     * @throws AssertionError if description is null or empty
+     */
     public Task(String description) {
+        assert description != null && !description.trim().isEmpty() : "Description cannot be null or empty";
         this.description = description;
     }
 

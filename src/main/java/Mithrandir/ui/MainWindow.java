@@ -26,9 +26,11 @@ public class MainWindow extends AnchorPane {
 
     private Application mithrandir;
 
-    private Image userImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/Frodo" +
+    private final Image userImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images" +
+            "/Frodo" +
             ".png")));
-    private Image mithrandirImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/Gandalf.png")));
+    private final Image mithrandirImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream(
+            "/images/Gandalf.png")));
 
     /**
      * Initializes the main window.
