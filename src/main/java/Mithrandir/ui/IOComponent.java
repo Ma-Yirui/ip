@@ -4,13 +4,21 @@ import Mithrandir.task.Deadline;
 import Mithrandir.task.Event;
 import Mithrandir.task.Todo;
 
+/**
+ * Handles all console input and output operations for the Mithrandir application.
+ * This class is responsible for formatting and displaying messages to the user,
+ * including task-related notifications, greetings, and error messages.
+ */
 public class IOComponent {
+    /** The separator line used to format console output. */
     private static final String separator = new String(new char[50]).replace('\0', '-');
 
     /**
-     * Prints a message surrounded by separator lines.
+     * Prints a message to the console surrounded by separator lines.
+     * This is the main output method used by all other methods in this class.
      *
-     * @param message the message to be printed
+     * @param message the message to be printed to the console
+     * @return the same message that was printed, for method chaining
      */
     public static String print(String message) {
         System.out.println(separator);
@@ -20,7 +28,9 @@ public class IOComponent {
     }
 
     /**
-     * Prints a greeting message from Gandalf.
+     * Returns a themed greeting message from Gandalf.
+     *
+     * @return the formatted greeting message
      */
     public String greet() {
         return print("A wizard is never late, nor is he early. "
@@ -29,52 +39,59 @@ public class IOComponent {
     }
 
     /**
-     * Prints a farewell message from Gandalf.
+     * Returns a themed farewell message from Gandalf.
+     *
+     * @return the formatted farewell message
      */
     public String exit() {
         return print("Farewell. My work is now finished.");
     }
 
     /**
-     * Prints a message stating that a Todo task has been added to the list.
+     * Generates a confirmation message for a newly added Todo task.
      *
-     * @param todo the Todo task that has been added
+     * @param todo the Todo task that was added to the list
+     * @return a formatted message confirming the addition of the Todo task
      */
     public String printAddToList(Todo todo) {
         return print("Added Todo: " + todo);
     }
 
     /**
-     * Prints a message stating that an Event task has been added to the list.
+     * Generates a confirmation message for a newly added Event task.
      *
-     * @param event the Event task that has been added
+     * @param event the Event task that was added to the list
+     * @return a formatted message confirming the addition of the Event task
      */
     public String printAddToList(Event event) {
         return print("Added Event: " + event);
     }
 
     /**
-     * Prints a message stating that a Deadline task has been added to the list.
+     * Generates a confirmation message for a newly added Deadline task.
      *
-     * @param deadline the Deadline task that has been added
+     * @param deadline the Deadline task that was added to the list
+     * @return a formatted message confirming the addition of the Deadline task
      */
     public String printAddToList(Deadline deadline) {
         return print("Added Deadline: " + deadline);
     }
 
     /**
-     * Prints a message indicating that a task has been successfully marked as done.
+     * Generates a success message for marking a task as done.
      *
-     * @param input a string representation of the task that has been marked done
+     * @param input a string representation of the task that was marked as done
+     * @return a formatted success message
      */
     public String printMarkDoneSuccessful(String input) {
         return print("Well done! The following task is deemed complete:\n" + input);
     }
 
     /**
-     * Prints a message indicating that a task has been successfully marked as undone.
+     * Generates a success message for marking a task as not done.
      *
-     * @param input a string representation of the task that has been marked undone
+     * @param input a string representation of the task that was marked as not done
+     * @return a formatted success message with a themed response
      */
     public String printMarkUndoneSuccessful(String input) {
         return print("Alas! It's the job that's never started as takes longest to finish. This task is " +
@@ -82,25 +99,32 @@ public class IOComponent {
     }
 
     /**
-     * Prints a message indicating that a task has been removed.
+     * Generates a confirmation message for removing a task.
      *
-     * @param input a string representation of the task that has been removed
+     * @param input a string representation of the task that was removed
+     * @return a formatted message confirming the removal
      */
     public String printRemoved(String input) {
-        return print("Removed task.Task: " + input);
+        return print("Removed task: " + input);
     }
 
     /**
-     * Prints the found tasks with a themed message.
+     * Formats and returns a message displaying the results of a task search.
      *
-     * @param input the string representation of the found tasks to be displayed
+     * @param input the string representation of the found tasks
+     * @return a themed message containing the search results
      */
-    public String printFoundTasks(String input){
+    public String printFoundTasks(String input) {
         return print("Ah... so you seek among your tasks, do you?\n" +
                 "Very well. I shall unveil what lies hidden in your list...\n" + input);
     }
 
-    public String printNotFoundTasks(){
+    /**
+     * Returns a themed message indicating that no tasks were found matching the search criteria.
+     *
+     * @return a formatted message indicating no tasks were found
+     */
+    public String printNotFoundTasks() {
         return print("""
                 Ah... so you seek among your tasks, do you?
                 Yet I find no record of such a thing in your keeping...

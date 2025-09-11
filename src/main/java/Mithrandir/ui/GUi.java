@@ -2,8 +2,6 @@ package Mithrandir.ui;
 
 import java.io.IOException;
 
-import Mithrandir.ui.MainWindow;
-import Mithrandir.ui.Ui;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,28 +9,55 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * The main GUI application class for the Mithrandir task management system.
+ * This class initializes and launches the JavaFX application, setting up the main window
+ * and connecting it with the Mithrandir application logic.
  */
 public class GUi extends Application {
 
+    /** The main application instance that handles the business logic. */
     private Mithrandir.Application mithrandir;
 
+    /**
+     * Constructs a new GUi instance and initializes the Mithrandir application.
+     * This constructor creates a new instance of the main application logic
+     * that will be used by the GUI components.
+     */
     public GUi() {
         mithrandir = new Mithrandir.Application();
     }
 
+    /**
+     * The main entry point for the JavaFX application.
+     * This method is called after the application has been initialized and is ready to start.
+     * It loads the main FXML layout, sets up the primary stage, and initializes the main window controller.
+     *
+     * @param stage The primary stage for this application, onto which
+     *              the application scene can be set.
+     * @throws RuntimeException if there is an error loading the FXML file.
+     */
     @Override
     public void start(Stage stage) {
         try {
+            // Load the FXML layout for the main window
             FXMLLoader fxmlLoader = new FXMLLoader(GUi.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
+            
+            // Set up the scene and stage
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            
+            // Initialize the controller with the application instance
             fxmlLoader.<MainWindow>getController().setMithrandir(mithrandir);
+            
+            // Display the stage
             stage.show();
+            
+            // Show the greeting message
             fxmlLoader.<MainWindow>getController().greet();
         } catch (IOException e) {
-            e.printStackTrace();
+            // Wrap the checked exception in a runtime exception
+            throw new RuntimeException("Failed to load the main window FXML", e);
         }
     }
 }

@@ -1,27 +1,27 @@
 package Mithrandir;
 
-import Mithrandir.MithrandirExceptions.InvalidArgumentException;
-import Mithrandir.MithrandirExceptions.MithrandirException;
-import Mithrandir.storage.FileStorage;
-import Mithrandir.task.Todo;
-import Mithrandir.ui.Ui;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.file.Path;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+import Mithrandir.MithrandirExceptions.InvalidArgumentException;
+import Mithrandir.MithrandirExceptions.MithrandirException;
+import Mithrandir.storage.FileStorage;
+import Mithrandir.task.Todo;
+import Mithrandir.ui.Ui;
 
 public class CommandTest {
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private Ui ui;
     private TaskList taskList;
     private FileStorage fileStorage;
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
     @BeforeEach
     void setUp(@TempDir Path tempDir) {
@@ -40,8 +40,8 @@ public class CommandTest {
 
     @Test
     void Command_execute_BYE_withArguments_throwsException() {
-        assertThrows(InvalidArgumentException.class, 
-            () -> Command.BYE.execute(ui, taskList, "extra argument", fileStorage));
+        assertThrows(InvalidArgumentException.class,
+                () -> Command.BYE.execute(ui, taskList, "extra argument", fileStorage));
     }
 
     @Test
@@ -60,8 +60,8 @@ public class CommandTest {
 
     @Test
     void Command_execute_LIST_withArguments_throwsException() {
-        assertThrows(InvalidArgumentException.class, 
-            () -> Command.LIST.execute(ui, taskList, "extra argument", fileStorage));
+        assertThrows(InvalidArgumentException.class,
+                () -> Command.LIST.execute(ui, taskList, "extra argument", fileStorage));
     }
 
     @Test
@@ -74,15 +74,15 @@ public class CommandTest {
     @Test
     void Command_execute_MARK_invalidIndex_throwsException() {
         taskList.addTask(new Todo("Test task"));
-        assertThrows(IndexOutOfBoundsException.class, 
-            () -> Command.MARK.execute(ui, taskList, "2", fileStorage));
+        assertThrows(IndexOutOfBoundsException.class,
+                () -> Command.MARK.execute(ui, taskList, "2", fileStorage));
     }
 
     @Test
     void Command_execute_MARK_nonNumericInput_throwsException() {
         taskList.addTask(new Todo("Test task"));
         assertThrows(InvalidArgumentException.class,
-            () -> Command.MARK.execute(ui, taskList, "not a number", fileStorage));
+                () -> Command.MARK.execute(ui, taskList, "not a number", fileStorage));
     }
 
     @Test
@@ -103,38 +103,38 @@ public class CommandTest {
 
     @Test
     void Command_execute_TODO_emptyDescription_throwsException() {
-        assertThrows(InvalidArgumentException.class, 
-            () -> Command.TODO.execute(ui, taskList, "", fileStorage));
+        assertThrows(InvalidArgumentException.class,
+                () -> Command.TODO.execute(ui, taskList, "", fileStorage));
     }
 
     @Test
     void Command_execute_DEADLINE_validInput_createsDeadline() throws MithrandirException, IOException {
-        Command.DEADLINE.execute(ui, taskList, 
-            "Submit report /by 31/12/2023 23:59", fileStorage);
+        Command.DEADLINE.execute(ui, taskList,
+                "Submit report /by 31/12/2023 23:59", fileStorage);
         assertEquals(1, taskList.getSize());
         assertTrue(taskList.getTask(0).toString().contains("[D][ ] Submit report (by: 31/12/2023 23:59)"));
     }
 
     @Test
     void Command_execute_DEADLINE_missingBy_throwsException() {
-        assertThrows(InvalidArgumentException.class, 
-            () -> Command.DEADLINE.execute(ui, taskList, "Submit report", fileStorage));
+        assertThrows(InvalidArgumentException.class,
+                () -> Command.DEADLINE.execute(ui, taskList, "Submit report", fileStorage));
     }
 
     @Test
     void Command_execute_EVENT_validInput_createsEvent() throws MithrandirException, IOException {
-        Command.EVENT.execute(ui, taskList, 
-            "Team meeting /from 01/01/2024 14:00 /to 01/01/2024 15:00", fileStorage);
+        Command.EVENT.execute(ui, taskList,
+                "Team meeting /from 01/01/2024 14:00 /to 01/01/2024 15:00", fileStorage);
         assertEquals(1, taskList.getSize());
         assertTrue(taskList.getTask(0).toString().contains(
-            "[E][ ] Team meeting (from: 01/01/2024 14:00 to: 01/01/2024 15:00)"));
+                "[E][ ] Team meeting (from: 01/01/2024 14:00 to: 01/01/2024 15:00)"));
     }
 
     @Test
     void Command_execute_EVENT_missingTo_throwsException() {
-        assertThrows(InvalidArgumentException.class, 
-            () -> Command.EVENT.execute(ui, taskList, 
-                "Team meeting /from 01/01/2024 14:00", fileStorage));
+        assertThrows(InvalidArgumentException.class,
+                () -> Command.EVENT.execute(ui, taskList,
+                        "Team meeting /from 01/01/2024 14:00", fileStorage));
     }
 
     @Test
@@ -149,7 +149,7 @@ public class CommandTest {
         taskList.addTask(new Todo("Buy groceries"));
         taskList.addTask(new Todo("Buy new shoes"));
         taskList.addTask(new Todo("Do laundry"));
-        
+
         Command.FIND.execute(ui, taskList, "buy", fileStorage);
         String output = outContent.toString();
         assertTrue(output.contains("Buy groceries"));
@@ -161,11 +161,11 @@ public class CommandTest {
     void Command_execute_integration_saveAndLoadTasks() throws Exception {
         // Add tasks and save to file
         Command.TODO.execute(ui, taskList, "Test storage", fileStorage);
-        
+
         // Create new task list and load from file
         TaskList newTaskList = new TaskList();
         fileStorage.loadTaskList().getTasks().forEach(newTaskList::addTask);
-        
+
         assertEquals(1, newTaskList.getSize());
         assertEquals("Test storage", newTaskList.getTask(0).getDescription());
     }

@@ -232,8 +232,8 @@ public enum Command {
             return ui.printFoundTasks(foundTasks);
         }
 
-    }
-    ;
+    };
+
     abstract String execute(Ui ui, TaskList list, String input, FileStorage storage) throws MithrandirException,
             IOException;
 }
