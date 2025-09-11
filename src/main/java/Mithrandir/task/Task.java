@@ -3,9 +3,9 @@ package Mithrandir.task;
 import java.time.format.DateTimeFormatter;
 
 public class Task {
+    protected final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
     private final String description;
     private Boolean isDone = false;
-    protected final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
     /**
      * Constructs a new Task with the given description.
@@ -42,6 +42,7 @@ public class Task {
      * Returns a string representation of the task in a format suitable for writing to a file.
      * The string consists of three parts separated by double pipes: the status of the task (either "done" or "undone"),
      * the description of the task, and the description of the task.
+     *
      * @return a string representation of the task in a format suitable for writing to a file
      */
     public String toFileString() {

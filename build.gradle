@@ -51,6 +51,6 @@ shadowJar {
     archiveVersion = "w3"
 }
 
-run{
+run {
     standardInput = System.in
 }

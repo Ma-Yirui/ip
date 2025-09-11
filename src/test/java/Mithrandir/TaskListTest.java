@@ -1,11 +1,12 @@
 package Mithrandir;
 
-import Mithrandir.task.Task;
-import Mithrandir.task.Todo;
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import Mithrandir.task.Task;
+import Mithrandir.task.Todo;
 
 public class TaskListTest {
     private TaskList taskList;
@@ -66,7 +67,7 @@ public class TaskListTest {
         taskList.addTask(testTask1);
         taskList.addTask(testTask2);
         String expected = String.format("TODO || undone || %s%nTODO || undone || %s",
-            testTask1.getDescription(), testTask2.getDescription());
+                testTask1.getDescription(), testTask2.getDescription());
         assertEquals(expected, taskList.generateFileStrings().trim());
     }
 
@@ -75,7 +76,7 @@ public class TaskListTest {
         taskList.addTask(new Todo("Buy groceries"));
         taskList.addTask(new Todo("Do laundry"));
         taskList.addTask(new Todo("Buy new shoes"));
-        
+
         TaskList foundTasks = taskList.findTasks("buy");
         assertEquals(2, foundTasks.getSize());
         assertTrue(foundTasks.toString().contains("Buy groceries"));
@@ -119,8 +120,8 @@ public class TaskListTest {
     void TaskList_toString_withTasks_returnsNumberedList() {
         taskList.addTask(testTask1);
         taskList.addTask(testTask2);
-        String expected = String.format("1. %s\n2. %s", 
-            testTask1.toString(), testTask2.toString());
+        String expected = String.format("1. %s\n2. %s",
+                testTask1.toString(), testTask2.toString());
         assertEquals(expected, taskList.toString().trim());
     }
 

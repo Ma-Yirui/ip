@@ -11,8 +11,8 @@ import Mithrandir.util.CommandParser;
 public class Application {
     private final Ui ui = new Ui();
     private final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-    private TaskList taskList = new TaskList();
     private final FileStorage fileStorage = new FileStorage("./Save/Save.txt");
+    private TaskList taskList = new TaskList();
 
     /**
      * Starts the application and processes user input.
