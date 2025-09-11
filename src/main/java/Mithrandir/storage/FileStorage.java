@@ -16,14 +16,17 @@ import Mithrandir.util.FileParser;
 
 
 public class FileStorage {
-    private final Path filePath;
+    private final Path saveFilePath;
+    private final Path archiveFilePath;
 
-    public FileStorage(Path filePath) {
-        this.filePath = filePath;
+    public FileStorage(Path saveFilePath, Path archiveFilePath) {
+        this.saveFilePath = saveFilePath;
+        this.archiveFilePath = archiveFilePath;
     }
 
-    public FileStorage(String filePath) {
-        this.filePath = Path.of(filePath);
+    public FileStorage(String saveFilePath, String archiveFilePath) {
+        this.saveFilePath = Path.of(saveFilePath);
+        this.archiveFilePath = Path.of(archiveFilePath);
     }
 
     /**
@@ -33,19 +36,21 @@ public class FileStorage {
      * @param tasks The string representation of tasks to be stored in the file.
      * @throws IOException If an I/O error occurs while creating directories, file, or writing to the file.
      */
-    public void store(String tasks) throws IOException {
+    public void store(String tasks, boolean isArchive) throws IOException {
         try {
-            Files.createDirectories(this.filePath.getParent());
-            if (!Files.exists(this.filePath)) {
-                Files.createFile(this.filePath);
+            Files.createDirectories(isArchive ? this.archiveFilePath.getParent() : this.saveFilePath.getParent());
+            if (!Files.exists(isArchive ? this.archiveFilePath : this.saveFilePath)) {
+                Files.createFile(isArchive ? this.archiveFilePath : this.saveFilePath);
             }
-            FileWriter fw = new FileWriter(filePath.toString());
+            FileWriter fw = new FileWriter(isArchive ? this.archiveFilePath.toString() : this.saveFilePath.toString()
+                    , isArchive);
             fw.write(tasks);
             fw.close();
         } catch (IOException e) {
             throw new IOException("Failed to store tasks to file: " + e.getMessage());
         }
     }
+
 
     /**
      * Loads the task list from the file specified by the file path.
@@ -55,7 +60,7 @@ public class FileStorage {
      * @throws Exception If an error occurs while reading the file or parsing the task data.
      */
     public TaskList loadTaskList() throws Exception {
-        File file = new File(this.filePath.toString());
+        File file = new File(this.saveFilePath.toString());
         if (!file.exists()) {
             return new TaskList();
         }

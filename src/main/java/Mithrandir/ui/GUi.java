@@ -23,8 +23,9 @@ public class GUi extends Application {
      * This constructor creates a new instance of the main application logic
      * that will be used by the GUI components.
      */
-    public GUi() {
+    public GUi() throws Exception {
         mithrandir = new Mithrandir.Application();
+        mithrandir.loadTaskList();
     }
 
     /**

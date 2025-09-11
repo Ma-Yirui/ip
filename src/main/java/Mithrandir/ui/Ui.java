@@ -16,7 +16,6 @@ import Mithrandir.task.Todo;
  */
 public class Ui {
     private final IOComponent IOComponent = new IOComponent();
-    private final ArrayList<Task> toDoList = new ArrayList<>();
 
     /**
      * Delegates to the IOComponent to print a greeting message from Gandalf.
@@ -110,6 +109,10 @@ public class Ui {
      */
     public String delete(Task task) throws IndexOutOfBoundsException {
         return this.IOComponent.printRemoved(task.toString());
+    }
+
+    public String archive(Task task) {
+        return this.IOComponent.printArchived(task.toString());
     }
 
     /**
