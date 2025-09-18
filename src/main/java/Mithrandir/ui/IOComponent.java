@@ -66,7 +66,7 @@ public class IOComponent {
      */
     public String printAddToList(Event event) {
         return print("Added Event: " + event + "\n" +
-                "The hour is set, and the task must be done ere its appointed time.");
+                "Aye, lad - the event is written, and when its time comes, you shall be ready.");
     }
 
     /**
@@ -77,7 +77,7 @@ public class IOComponent {
      */
     public String printAddToList(Deadline deadline) {
         return print("Added Deadline: " + deadline + "\n" +
-                "Aye, lad - the event is written, and when its time comes, you shall be ready.");
+                "The hour is set, and the task must be done ere its appointed time.");
     }
 
     /**
