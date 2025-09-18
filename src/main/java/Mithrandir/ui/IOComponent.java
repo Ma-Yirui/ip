@@ -55,7 +55,7 @@ public class IOComponent {
      */
     public String printAddToList(Todo todo) {
         return print("Added Todo: " + todo + "\n" +
-                "“A simple task, yet no less vital — it has been woven into your journey.”");
+                "A simple task, yet no less vital - it has been woven into your journey.");
     }
 
     /**
@@ -77,7 +77,7 @@ public class IOComponent {
      */
     public String printAddToList(Deadline deadline) {
         return print("Added Deadline: " + deadline + "\n" +
-                "Aye, lad — the event is written, and when its time comes, you shall be ready.");
+                "Aye, lad - the event is written, and when its time comes, you shall be ready.");
     }
 
     /**
@@ -135,8 +135,25 @@ public class IOComponent {
                 Be watchful, for only the tasks you have written may answer your call.""");
     }
 
+    /**
+     * Returns a themed success message for archiving a task.
+     *
+     * @return a formatted message for archiving a task
+     */
     public String printArchived(String input) {
         return print("Archived task: " + input +
                 "\nthe task is now sealed away in the vaults of memory, never again to trouble your road ahead.");
+    }
+
+
+    /**
+     * Formats and returns a themed message displaying the task list.
+     *
+     * @param input the string representation of the task list
+     * @return a formatted message containing the task list with themed text
+     */
+    public String printList(String input) {
+        return print(input + "\n" +
+                "Behold! Here are the labors you have set upon, laid plain before your eyes as stones upon the path.");
     }
 }
