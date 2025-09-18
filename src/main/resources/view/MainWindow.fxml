@@ -32,7 +32,8 @@
                     hvalue="1.0"
                     prefHeight="557.0"
                     prefWidth="400.0"
-                    vvalue="1.0">
+                    vvalue="1.0"
+                    pannable = "true">
             <content>
                 <VBox fx:id="dialogContainer"
                       prefHeight="552.0"
