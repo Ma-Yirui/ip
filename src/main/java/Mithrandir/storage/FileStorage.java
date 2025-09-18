@@ -77,6 +77,8 @@ public class FileStorage {
                 }
             }
             return taskList;
+        } catch (IOException e) {
+            throw new IOException("Failed to read tasks from file: " + e.getMessage());
         }
     }
 }

@@ -23,6 +23,8 @@ public class Deadline extends Task {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidArgumentException("Deadline command need 3 parts: task description, '/by' and deadline, " +
                     "you are missing on something. Check your command!");
+        } catch (DateTimeParseException e) {
+            throw new InvalidArgumentException("Invalid date format. Please use the format: dd/MM/yyyy HH:mm.");
         }
     }
 

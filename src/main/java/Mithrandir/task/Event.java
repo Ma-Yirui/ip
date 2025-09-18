@@ -24,17 +24,28 @@ public class Event extends Task {
      */
     public Event(String description) throws MithrandirException {
         super(description.split("/from")[0].trim());
-        String[] params = description.split("/from")[1].split("/to");
-        if (params.length != 2) {
-            throw new InvalidArgumentException("Invalid event format. Please use the format: " +
-                    "task description /from start time /to end time.");
-        }
+        String[] params = getStrings(description);
         try {
             this.fromTime = LocalDateTime.parse(params[0].trim(), this.formatter);
             this.toTime = LocalDateTime.parse(params[1].trim(), this.formatter);
         } catch (DateTimeParseException e) {
             throw new DateTimeFormatException("Invalid date format. Please use the format: dd/MM/yyyy HH:mm.");
         }
+    }
+
+    private static String[] getStrings(String description) throws InvalidArgumentException {
+        String[] params = null;
+        try {
+            params = description.split("/from")[1].split("/to");
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidArgumentException("Invalid event format. Please use the format: " +
+                    "task description /from start time /to end time.");
+        }
+        if (params.length != 2) {
+            throw new InvalidArgumentException("Invalid event format. Please use the format: " +
+                    "task description /from start time /to end time.");
+        }
+        return params;
     }
 
     @Override

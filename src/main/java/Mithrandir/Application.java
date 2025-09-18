@@ -79,7 +79,7 @@ public class Application {
         } catch (Exception e) {
             if (e.getMessage().contains("No enum constant")) {
                 return ui.print("No such command! Supported commands are: TODO, EVENT, DEADLINE, BYE, LIST, MARK, " +
-                        "UNMARK");
+                        "UNMARK, FIND, ARCHIVE");
             } else {
                 return ui.print(e.getMessage());
             }

@@ -46,7 +46,10 @@ public enum Command {
                 return "LIST command have no argument!";
             }
             if (list.isEmpty()) {
-                return ui.print("No tasks in the list.");
+                return ui.print("""
+                        There is nothing here, not even the faintest shadow of a task.
+                        Your TaskList stands empty, like the halls of Khazad-dum after the dwarves had gone.
+                        Add a task, and perhaps light will return to these darkened records.""");
             } else {
                 return ui.printList(list);
             }
@@ -77,6 +80,8 @@ public enum Command {
                 return result;
             } catch (NumberFormatException e) {
                 return "MARK command need one INTEGER as argument!";
+            } catch (IndexOutOfBoundsException e) {
+                return "The index you have chosen lies beyond the bounds of the TaskList.";
             }
         }
     },
@@ -105,6 +110,8 @@ public enum Command {
                 return result;
             } catch (NumberFormatException e) {
                 return "UNMARK command need one INTEGER as argument!";
+            } catch (IndexOutOfBoundsException e) {
+                return "The index you have chosen lies beyond the bounds of the TaskList.";
             }
         }
     },
@@ -247,9 +254,9 @@ public enum Command {
                 storage.store(archivedTask.toFileString(), true);
                 return result;
             } catch (NumberFormatException e) {
-                return "DELETE command need one INTEGER as argument!";
+                return "ARCHIVE command need one INTEGER as argument!";
             } catch (IndexOutOfBoundsException e) {
-                return "Index to be deleted is out of bounds of the todo list!";
+                return "Index to be archived is out of bounds of the todo list!";
             }
         }
     };
