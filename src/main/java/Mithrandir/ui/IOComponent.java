@@ -54,7 +54,8 @@ public class IOComponent {
      * @return a formatted message confirming the addition of the Todo task
      */
     public String printAddToList(Todo todo) {
-        return print("Added Todo: " + todo);
+        return print("Added Todo: " + todo + "\n" +
+                "“A simple task, yet no less vital — it has been woven into your journey.”");
     }
 
     /**
@@ -64,7 +65,8 @@ public class IOComponent {
      * @return a formatted message confirming the addition of the Event task
      */
     public String printAddToList(Event event) {
-        return print("Added Event: " + event);
+        return print("Added Event: " + event + "\n" +
+                "The hour is set, and the task must be done ere its appointed time.");
     }
 
     /**
@@ -74,7 +76,8 @@ public class IOComponent {
      * @return a formatted message confirming the addition of the Deadline task
      */
     public String printAddToList(Deadline deadline) {
-        return print("Added Deadline: " + deadline);
+        return print("Added Deadline: " + deadline + "\n" +
+                "Aye, lad — the event is written, and when its time comes, you shall be ready.");
     }
 
     /**
@@ -105,7 +108,8 @@ public class IOComponent {
      * @return a formatted message confirming the removal
      */
     public String printRemoved(String input) {
-        return print("Removed task: " + input);
+        return print("Removed task: " + input + "\n" +
+                "The deed is struck from the scrolls of your labors, passing now into shadow and memory");
     }
 
     /**
