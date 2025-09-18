@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -42,11 +43,18 @@ public class GUi extends Application {
         try {
             // Load the FXML layout for the main window
             FXMLLoader fxmlLoader = new FXMLLoader(GUi.class.getResource("/view/MainWindow.fxml"));
+
             AnchorPane ap = fxmlLoader.load();
             
             // Set up the scene and stage
+            Image icon = new Image(getClass().getResourceAsStream("/images/OneRing.png"));
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setMinWidth(400);
+            stage.setMinHeight(600);
+            stage.setTitle("Mithrandir");
+            stage.getIcons().add(icon);
+
             
             // Initialize the controller with the application instance
             fxmlLoader.<MainWindow>getController().setMithrandir(mithrandir);

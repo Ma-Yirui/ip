@@ -4,42 +4,51 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml" maxHeight="-Infinity"
-            maxWidth="-Infinity" minHeight="-Infinity"
-            minWidth="-Infinity" prefHeight="600.0"
-            prefWidth="400.0"
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
             xmlns="http://javafx.com/javafx/17.0.2"
-            fx:controller="Mithrandir.ui.MainWindow">
+            fx:controller="Mithrandir.ui.MainWindow"
+            minHeight="600.0"
+            minWidth="400.0"
+            prefHeight="600.0"
+            prefWidth="400.0">
+
     <children>
-        <TextField fx:id="userInput"
-                   layoutY="558.0"
-                   onAction="#handleUserInput"
-                   prefHeight="41.0"
-                   prefWidth="324.0"
-                   AnchorPane.bottomAnchor="1.0"/>
-        <Button fx:id="sendButton"
-                layoutX="324.0"
-                layoutY="558.0"
-                mnemonicParsing="false"
-                onAction="#handleUserInput"
-                prefHeight="41.0"
-                prefWidth="76.0"
-                text="Send"/>
         <ScrollPane fx:id="scrollPane"
+                    AnchorPane.topAnchor="0.0"
+                    AnchorPane.leftAnchor="0.0"
+                    AnchorPane.rightAnchor="0.0"
+                    AnchorPane.bottomAnchor="42.0"
+                    fitToWidth="true"
                     hbarPolicy="NEVER"
-                    hvalue="1.0"
-                    prefHeight="557.0"
-                    prefWidth="400.0"
-                    vvalue="1.0"
-                    pannable = "true">
+                    vbarPolicy="ALWAYS"
+                    pannable="true">
             <content>
                 <VBox fx:id="dialogContainer"
-                      prefHeight="552.0"
-                      prefWidth="388.0"/>
+                      fillWidth="true"
+                      AnchorPane.leftAnchor="0.0"
+                      AnchorPane.rightAnchor="0.0"
+                />
             </content>
         </ScrollPane>
+
+        <HBox spacing="5.0"
+              AnchorPane.leftAnchor="0.0"
+              AnchorPane.rightAnchor="0.0"
+              AnchorPane.bottomAnchor="0.0"
+              prefHeight="41.0">
+            <children>
+                <TextField fx:id="userInput"
+                           HBox.hgrow="ALWAYS"
+                           onAction="#handleUserInput"/>
+                <Button fx:id="sendButton"
+                        text="Send"
+                        onAction="#handleUserInput"/>
+            </children>
+        </HBox>
     </children>
 </AnchorPane>
+
 
