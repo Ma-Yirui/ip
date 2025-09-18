@@ -48,7 +48,7 @@ public enum Command {
             if (list.isEmpty()) {
                 return ui.print("No tasks in the list.");
             } else {
-                return ui.print(list.toString());
+                return ui.printList(list);
             }
         }
     },

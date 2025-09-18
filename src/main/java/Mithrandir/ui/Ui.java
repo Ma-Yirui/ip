@@ -142,4 +142,8 @@ public class Ui {
             return this.IOComponent.printFoundTasks(str);
         }
     }
+
+    public String printList(TaskList taskList) {
+        return this.IOComponent.printList(taskList.toString());
+    }
 }

@@ -1,8 +1,12 @@
 package Mithrandir;
 
+import static java.lang.Thread.sleep;
+
+import javafx.animation.PauseTransition;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.HashMap;
+import javafx.util.Duration;
 
 import Mithrandir.storage.FileStorage;
 import Mithrandir.ui.Ui;
@@ -42,11 +46,10 @@ public class Application {
             } catch (Exception e) {
                 if (e.getMessage().contains("No enum constant")) {
                     ui.print("No such command! Supported commands are: TODO, EVENT, DEADLINE, BYE, LIST, MARK, " +
-                            "UNMARK");
+                            "UNMARK, FIND, ARCHIVE");
                 } else {
                     ui.print(e.getMessage());
                 }
-
             }
             nextLine = bufferedReader.readLine();
         }
@@ -69,7 +72,10 @@ public class Application {
                 return Command.valueOf(command.get("command word")).execute(this.ui, this.taskList,
                         command.get("description"), this.fileStorage);
             }
-            javafx.application.Platform.exit();
+            PauseTransition delay = new PauseTransition(Duration.millis(3000));
+            delay.setOnFinished(event -> javafx.application.Platform.exit());
+            delay.play();
+            return ui.exit();
         } catch (Exception e) {
             if (e.getMessage().contains("No enum constant")) {
                 return ui.print("No such command! Supported commands are: TODO, EVENT, DEADLINE, BYE, LIST, MARK, " +
@@ -77,9 +83,7 @@ public class Application {
             } else {
                 return ui.print(e.getMessage());
             }
-
         }
-        return "Gibberish";
     }
 
     public String greet() {
