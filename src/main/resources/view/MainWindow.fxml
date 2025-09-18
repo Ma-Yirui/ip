@@ -7,13 +7,15 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml"
+<AnchorPane fx:id="rootPane"
+            xmlns:fx="http://javafx.com/fxml"
             xmlns="http://javafx.com/javafx/17.0.2"
             fx:controller="Mithrandir.ui.MainWindow"
             minHeight="600.0"
             minWidth="400.0"
             prefHeight="600.0"
-            prefWidth="400.0">
+            prefWidth="400.0"
+            stylesheets="@MainWindow.css">
 
     <children>
         <ScrollPane fx:id="scrollPane"
@@ -24,17 +26,18 @@
                     fitToWidth="true"
                     hbarPolicy="NEVER"
                     vbarPolicy="ALWAYS"
-                    pannable="true">
+                    pannable="true"
+                    stylesheets="@ScrollPane.css">
             <content>
                 <VBox fx:id="dialogContainer"
                       fillWidth="true"
                       AnchorPane.leftAnchor="0.0"
-                      AnchorPane.rightAnchor="0.0"
-                />
+                      AnchorPane.rightAnchor="0.0"/>
             </content>
         </ScrollPane>
 
-        <HBox spacing="5.0"
+        <HBox fx:id="inputHBox"
+              spacing="5.0"
               AnchorPane.leftAnchor="0.0"
               AnchorPane.rightAnchor="0.0"
               AnchorPane.bottomAnchor="0.0"
